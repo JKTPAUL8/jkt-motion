@@ -1,0 +1,2062 @@
+<!DOCTYPE html>
+<html lang="ro" data-lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="JKT Motion — video editing, color grading, sound design și content pentru automotive, evenimente și social media." />
+  <meta name="theme-color" content="#0a0a0a" />
+  <title>JKT Motion — Video Editor</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%23090909'/%3E%3Cpath d='M9 45 19 17h9l-5 14 12-14h11L33 31l12 14H34l-9-10-4 10Z' fill='%23e44f28'/%3E%3C/svg%3E" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,600;0,700;0,800;0,900;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,600;0,700;0,800;0,900;1,700&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg: #090909;
+  --bg-soft: #111111;
+  --ink: #f0e9df;
+  --muted: #9d9891;
+  --line: #2a2928;
+  --accent: #e44f28;
+  --accent-deep: #b8201f;
+  --accent-warm: #ff6a2a;
+  --shadow: rgba(228, 79, 40, 0.22);
+  --display: "Barlow Condensed", Impact, sans-serif;
+  --body: "Inter", Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--bg);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 85% 10%, rgba(228,79,40,.08), transparent 25%),
+    radial-gradient(circle at 10% 62%, rgba(184,32,31,.05), transparent 22%),
+    var(--bg);
+  color: var(--ink);
+  font-family: var(--body);
+  overflow-x: hidden;
+}
+
+body.menu-open {
+  overflow: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  color: inherit;
+  font: inherit;
+}
+
+::selection {
+  background: var(--accent);
+  color: #080808;
+}
+
+.noise {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  opacity: .11;
+  mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+}
+
+.cursor-glow {
+  position: fixed;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(228,79,40,.08), transparent 66%);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity .2s ease;
+}
+
+.site-header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 78px;
+  padding: 0 clamp(20px, 4vw, 64px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 80;
+  background: linear-gradient(to bottom, rgba(9,9,9,.94), rgba(9,9,9,.62), transparent);
+  backdrop-filter: blur(10px);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 7px;
+  font-family: var(--display);
+  text-transform: uppercase;
+  letter-spacing: .02em;
+  position: relative;
+  z-index: 2;
+}
+
+.brand::after {
+  content: "";
+  position: absolute;
+  left: -5px;
+  bottom: -4px;
+  width: 34px;
+  height: 3px;
+  background: var(--accent);
+  transform: rotate(-5deg);
+}
+
+.brand-jkt {
+  font-size: 29px;
+  font-weight: 900;
+}
+
+.brand-motion {
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: .15em;
+  color: var(--muted);
+}
+
+.desktop-nav {
+  display: flex;
+  gap: 30px;
+  margin-left: auto;
+  margin-right: 42px;
+}
+
+.desktop-nav a {
+  color: #c9c4bc;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  transition: color .2s ease, transform .2s ease;
+}
+
+.desktop-nav a:hover {
+  color: var(--accent);
+  transform: translateY(-2px) rotate(-1deg);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.language-switcher {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--display);
+  font-weight: 700;
+  letter-spacing: .08em;
+}
+
+.lang-btn {
+  border: 0;
+  background: transparent;
+  color: #777;
+  padding: 4px 2px;
+  cursor: pointer;
+  transition: .2s ease;
+}
+
+.lang-btn.active {
+  color: var(--accent);
+  transform: rotate(-2deg);
+}
+
+.language-switcher span {
+  color: #4a4743;
+}
+
+.menu-toggle {
+  display: none;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid var(--line);
+  background: rgba(17,17,17,.8);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.menu-toggle span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: var(--ink);
+  transition: .25s ease;
+}
+
+.menu-toggle.active span:first-child {
+  transform: translateY(4px) rotate(45deg);
+}
+.menu-toggle.active span:last-child {
+  transform: translateY(-4px) rotate(-45deg);
+}
+
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  background: rgba(9,9,9,.98);
+  display: grid;
+  align-content: center;
+  gap: 10px;
+  padding: 100px 24px 40px;
+  transform: translateY(-105%);
+  transition: transform .4s cubic-bezier(.22,.8,.28,1);
+  visibility: hidden;
+}
+
+.mobile-menu.open {
+  transform: translateY(0);
+  visibility: visible;
+}
+
+.mobile-menu a {
+  font-family: var(--display);
+  font-size: clamp(48px, 12vw, 86px);
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: .95;
+  border-bottom: 1px solid var(--line);
+  padding: 10px 0;
+}
+
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(330px, .85fr);
+  align-items: center;
+  gap: clamp(30px, 5vw, 90px);
+  padding: 120px clamp(22px, 6vw, 100px) 70px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  width: 78vw;
+  height: 78vw;
+  right: -42vw;
+  top: 4vh;
+  border: 1px solid rgba(228,79,40,.1);
+  border-radius: 50%;
+  z-index: -2;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  left: -8vw;
+  bottom: -5vw;
+  width: 28vw;
+  height: 10vw;
+  border: 2px solid rgba(240,233,223,.05);
+  transform: rotate(18deg);
+  z-index: -2;
+}
+
+.hero-lines {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: .23;
+}
+
+.hero-lines svg {
+  width: 100%;
+  height: 100%;
+}
+
+.hero-lines path {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+  stroke-dasharray: 7 16;
+}
+
+.eyebrow,
+.section-kicker {
+  margin: 0 0 18px;
+  color: var(--accent);
+  font-family: var(--display);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  margin: 0;
+  font-family: var(--display);
+  font-size: clamp(92px, 15vw, 220px);
+  line-height: .69;
+  font-weight: 900;
+  letter-spacing: -.055em;
+  text-transform: uppercase;
+}
+
+.hero h1 > span {
+  display: block;
+}
+
+.hero h1 .accent-outline {
+  margin-left: .12em;
+  transform: skew(-5deg);
+}
+
+.accent-outline {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--accent);
+  text-shadow: 5px 5px 0 rgba(228,79,40,.1);
+}
+
+.hero-tagline {
+  margin-top: 38px;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.hero-tagline .slash {
+  color: var(--accent);
+  font-family: var(--display);
+  font-size: 36px;
+  font-weight: 900;
+  transform: rotate(10deg);
+}
+
+.hero-tagline p {
+  margin: 0;
+  max-width: 520px;
+  color: #d8d2c9;
+  font-family: var(--display);
+  font-size: clamp(24px, 3vw, 41px);
+  font-weight: 600;
+  line-height: 1;
+}
+
+.hero-cta {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  margin-top: 36px;
+}
+
+.btn {
+  min-height: 52px;
+  padding: 0 22px;
+  display: inline-flex;
+  align-items: center;
+  gap: 24px;
+  border: 1px solid transparent;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  transition: transform .2s ease, background .2s ease;
+}
+
+.btn-primary {
+  position: relative;
+  background: var(--accent);
+  color: #0a0a0a;
+  box-shadow: 8px 8px 0 rgba(184,32,31,.28);
+}
+
+.btn-primary::before {
+  content: "";
+  position: absolute;
+  inset: -5px 5px 5px -5px;
+  border: 1px solid rgba(228,79,40,.5);
+  z-index: -1;
+  transform: rotate(-1.5deg);
+}
+
+.btn-primary:hover {
+  transform: translate(-2px, -2px) rotate(-1deg);
+  background: var(--accent-warm);
+}
+
+.text-link {
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 600;
+  border-bottom: 1px solid #544f4a;
+  padding-bottom: 6px;
+  transition: .2s ease;
+}
+
+.text-link:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.hero-art {
+  position: relative;
+  min-height: min(62vw, 650px);
+  display: grid;
+  place-items: center;
+}
+
+.blast-ring {
+  position: absolute;
+  border-radius: 48% 52% 46% 54%;
+  border: 1px solid rgba(228,79,40,.32);
+}
+
+.ring-one {
+  width: 79%;
+  aspect-ratio: 1;
+  transform: rotate(17deg);
+}
+
+.ring-two {
+  width: 58%;
+  aspect-ratio: 1;
+  border-width: 2px;
+  transform: rotate(-18deg);
+}
+
+.ring-three {
+  width: 39%;
+  aspect-ratio: 1;
+  border-color: rgba(240,233,223,.18);
+  transform: rotate(30deg);
+}
+
+.hero-badge {
+  width: clamp(190px, 22vw, 270px);
+  aspect-ratio: .92;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  position: relative;
+  background:
+    linear-gradient(135deg, rgba(228,79,40,.96), rgba(184,32,31,.88)),
+    #d9442c;
+  color: #090909;
+  clip-path: polygon(12% 4%, 91% 10%, 98% 72%, 81% 95%, 15% 89%, 3% 28%);
+  transform: rotate(-7deg);
+  box-shadow: 0 0 90px rgba(228,79,40,.15);
+}
+
+.hero-badge::after {
+  content: "";
+  position: absolute;
+  inset: 13%;
+  border: 2px dashed rgba(9,9,9,.48);
+  clip-path: inherit;
+}
+
+.hero-badge span {
+  font-family: var(--display);
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: .2em;
+}
+
+.hero-badge strong {
+  font-family: var(--display);
+  font-size: clamp(88px, 10vw, 135px);
+  line-height: .72;
+  font-weight: 900;
+  letter-spacing: -.05em;
+}
+
+.hero-zigzag {
+  position: absolute;
+  width: 54%;
+  height: 60px;
+  bottom: 13%;
+  right: 3%;
+  background:
+    linear-gradient(135deg, transparent 0 35%, var(--ink) 36% 42%, transparent 43% 57%, var(--ink) 58% 64%, transparent 65%) 0 0/62px 60px repeat-x;
+  opacity: .1;
+  transform: rotate(-14deg);
+}
+
+.hero-cross {
+  position: absolute;
+  font-family: var(--display);
+  color: var(--accent);
+  font-weight: 900;
+  font-size: 45px;
+}
+
+.cross-one {
+  top: 13%;
+  left: 8%;
+  transform: rotate(18deg);
+}
+
+.cross-two {
+  bottom: 25%;
+  right: 5%;
+  transform: rotate(-10deg);
+}
+
+.hero-spark {
+  position: absolute;
+  width: 3px;
+  height: 70px;
+  background: var(--accent);
+  box-shadow: 0 0 20px rgba(228,79,40,.7);
+}
+
+.spark-one {
+  left: 20%;
+  bottom: 12%;
+  transform: rotate(56deg);
+}
+
+.spark-two {
+  top: 17%;
+  right: 14%;
+  height: 50px;
+  transform: rotate(-36deg);
+}
+
+.scroll-mark {
+  position: absolute;
+  right: 30px;
+  bottom: 34px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transform: rotate(90deg);
+  transform-origin: right bottom;
+  color: #77716a;
+  font-size: 10px;
+  letter-spacing: .18em;
+}
+
+.scroll-mark div {
+  width: 70px;
+  height: 1px;
+  background: linear-gradient(to right, var(--accent), transparent);
+}
+
+.ticker {
+  overflow: hidden;
+  background: var(--accent);
+  color: #090909;
+  border-block: 1px solid rgba(0,0,0,.35);
+  transform: rotate(-.5deg) scale(1.02);
+}
+
+.ticker-track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  animation: ticker 28s linear infinite;
+  white-space: nowrap;
+  padding: 12px 0;
+}
+
+.ticker span {
+  font-family: var(--display);
+  font-weight: 900;
+  letter-spacing: .08em;
+  font-size: clamp(18px, 2vw, 27px);
+  padding: 0 22px;
+}
+
+.ticker i {
+  font-style: normal;
+  font-size: 15px;
+}
+
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.section {
+  padding: clamp(100px, 12vw, 170px) clamp(22px, 6vw, 100px);
+  position: relative;
+}
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  align-items: flex-end;
+  margin-bottom: 54px;
+}
+
+.section-head h2,
+.about-copy h2,
+.process-heading h2 {
+  margin: 0;
+  font-family: var(--display);
+  font-size: clamp(60px, 9vw, 130px);
+  line-height: .78;
+  text-transform: uppercase;
+  letter-spacing: -.045em;
+}
+
+.section-note {
+  max-width: 440px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.work-section {
+  border-top: 1px solid var(--line);
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 22px;
+}
+
+.project-card {
+  grid-column: span 6;
+  min-height: 430px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #282725;
+  background:
+    linear-gradient(140deg, rgba(228,79,40,.07), transparent 30%),
+    #101010;
+  cursor: pointer;
+  isolation: isolate;
+  transition: transform .25s ease, border-color .25s ease;
+}
+
+.project-card:nth-child(3n) {
+  grid-column: span 7;
+}
+
+.project-card:nth-child(4n) {
+  grid-column: span 5;
+}
+
+.project-card::before {
+  content: "";
+  position: absolute;
+  inset: -20% 50% -20% -25%;
+  background: repeating-linear-gradient(
+    -20deg,
+    rgba(228,79,40,.22) 0 2px,
+    transparent 2px 28px
+  );
+  transform: skewX(-8deg);
+  z-index: -1;
+  transition: transform .35s ease;
+}
+
+.project-card::after {
+  content: "";
+  position: absolute;
+  width: 48%;
+  aspect-ratio: 1;
+  right: -12%;
+  top: -12%;
+  border: 1px dashed rgba(228,79,40,.28);
+  border-radius: 50%;
+}
+
+.project-card:hover {
+  transform: translateY(-5px) rotate(-.3deg);
+  border-color: rgba(228,79,40,.5);
+}
+
+.project-card:hover::before {
+  transform: skewX(-8deg) translateX(18px);
+}
+
+.project-thumb {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+
+.project-no {
+  font-family: var(--display);
+  font-size: clamp(130px, 20vw, 260px);
+  font-weight: 900;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(240,233,223,.08);
+  transform: rotate(-6deg);
+}
+
+.project-play {
+  position: absolute;
+  width: 74px;
+  height: 74px;
+  border: 1px solid rgba(240,233,223,.7);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 20px;
+  backdrop-filter: blur(4px);
+  transition: .25s ease;
+}
+
+.project-card:hover .project-play {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #090909;
+  transform: rotate(-8deg) scale(1.08);
+}
+
+.project-info {
+  position: absolute;
+  inset: auto 24px 22px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 20px;
+}
+
+.project-meta {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.project-meta span {
+  border: 1px solid #403d39;
+  padding: 5px 8px;
+  color: #aaa49c;
+  font-size: 9px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  background: rgba(9,9,9,.55);
+}
+
+.project-title {
+  margin: 0;
+  font-family: var(--display);
+  font-size: clamp(30px, 4vw, 52px);
+  line-height: .95;
+  text-transform: uppercase;
+}
+
+.project-status {
+  font-family: var(--display);
+  font-size: 12px;
+  color: var(--accent);
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.about-section {
+  display: grid;
+  grid-template-columns: .7fr 1.3fr;
+  gap: clamp(50px, 8vw, 150px);
+  align-items: start;
+  background:
+    linear-gradient(to right, transparent, rgba(228,79,40,.025)),
+    #0c0c0c;
+  border-block: 1px solid var(--line);
+}
+
+.about-mark {
+  position: sticky;
+  top: 150px;
+  font-family: var(--display);
+  font-size: clamp(90px, 14vw, 200px);
+  font-weight: 900;
+  line-height: .65;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(228,79,40,.35);
+  transform: rotate(-6deg);
+}
+
+.about-mark span {
+  display: block;
+}
+
+.about-mark span:last-child {
+  color: var(--accent);
+  -webkit-text-stroke: 0;
+  font-size: .38em;
+  margin-top: .25em;
+  letter-spacing: -.1em;
+}
+
+.about-copy h2 {
+  max-width: 850px;
+  font-size: clamp(58px, 7vw, 100px);
+  line-height: .86;
+}
+
+.about-text {
+  max-width: 780px;
+  margin-top: 45px;
+  display: grid;
+  gap: 22px;
+  color: #bbb5ad;
+  font-size: clamp(16px, 1.6vw, 19px);
+  line-height: 1.75;
+}
+
+.about-text p {
+  margin: 0;
+}
+
+.services-section {
+  background: #090909;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+
+.service-card {
+  min-height: 280px;
+  padding: 28px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  position: relative;
+  overflow: hidden;
+  transition: background .25s ease, transform .25s ease;
+}
+
+.service-card::after {
+  content: "";
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  right: -45px;
+  bottom: -45px;
+  border: 1px solid rgba(228,79,40,.35);
+  transform: rotate(45deg);
+}
+
+.service-card:hover {
+  background: #111;
+  transform: translateY(-3px);
+}
+
+.service-index {
+  color: var(--accent);
+  font-family: var(--display);
+  font-size: 13px;
+  letter-spacing: .14em;
+}
+
+.service-card h3 {
+  margin: 45px 0 16px;
+  font-family: var(--display);
+  font-size: 54px;
+  line-height: .9;
+  text-transform: uppercase;
+}
+
+.service-card p {
+  margin: 0;
+  max-width: 370px;
+  color: #a7a19a;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.process-section {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(110px, 12vw, 180px) clamp(22px, 6vw, 100px);
+  background: var(--accent);
+  color: #090909;
+}
+
+.process-line {
+  position: absolute;
+  width: 120%;
+  height: 70px;
+  left: -10%;
+  top: 20%;
+  background:
+    linear-gradient(135deg, transparent 0 37%, rgba(9,9,9,.12) 38% 44%, transparent 45% 58%, rgba(9,9,9,.12) 59% 65%, transparent 66%) 0 0/74px 70px repeat-x;
+  transform: rotate(-4deg);
+}
+
+.process-inner {
+  position: relative;
+  z-index: 2;
+}
+
+.process-heading {
+  max-width: 850px;
+}
+
+.process-heading .section-kicker {
+  color: rgba(9,9,9,.65);
+}
+
+.process-heading h2 {
+  font-size: clamp(64px, 8vw, 115px);
+}
+
+.process-steps {
+  margin-top: 70px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid rgba(9,9,9,.35);
+  border-left: 1px solid rgba(9,9,9,.35);
+}
+
+.process-step {
+  min-height: 230px;
+  padding: 24px;
+  border-right: 1px solid rgba(9,9,9,.35);
+  border-bottom: 1px solid rgba(9,9,9,.35);
+}
+
+.process-step > span {
+  font-family: var(--display);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.process-step h3 {
+  margin: 45px 0 10px;
+  font-family: var(--display);
+  font-size: 43px;
+  line-height: .9;
+  text-transform: uppercase;
+}
+
+.process-step p {
+  margin: 0;
+  color: rgba(9,9,9,.68);
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.contact-section {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(120px, 14vw, 210px) clamp(22px, 6vw, 100px) 100px;
+  border-bottom: 1px solid var(--line);
+}
+
+.contact-scribble {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 28%;
+  opacity: .16;
+}
+
+.contact-scribble svg {
+  width: 100%;
+  height: 260px;
+}
+
+.contact-scribble path {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 3;
+}
+
+.contact-inner {
+  position: relative;
+  z-index: 2;
+}
+
+.contact-inner h2 {
+  margin: 0;
+  font-family: var(--display);
+  font-size: clamp(76px, 13vw, 190px);
+  line-height: .72;
+  letter-spacing: -.05em;
+  text-transform: uppercase;
+}
+
+.contact-inner h2 span {
+  display: block;
+}
+
+.contact-inner h2 .accent-outline {
+  margin-left: .05em;
+}
+
+.contact-links {
+  margin-top: 80px;
+  border-top: 1px solid var(--line);
+}
+
+.contact-links a {
+  min-height: 94px;
+  display: grid;
+  grid-template-columns: 140px 1fr auto;
+  align-items: center;
+  gap: 20px;
+  border-bottom: 1px solid var(--line);
+  transition: color .2s ease, padding .2s ease, background .2s ease;
+}
+
+.contact-links a:hover {
+  color: var(--accent);
+  padding-left: 12px;
+  background: rgba(228,79,40,.025);
+}
+
+.contact-links a > span:first-child {
+  color: #817b74;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .13em;
+}
+
+.contact-links strong {
+  font-family: var(--display);
+  font-size: clamp(25px, 4vw, 50px);
+  font-weight: 600;
+  line-height: 1;
+}
+
+.contact-links a > span:last-child {
+  font-size: 26px;
+}
+
+footer {
+  min-height: 130px;
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 30px;
+  padding: 30px clamp(22px, 6vw, 100px);
+  color: #77716a;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+}
+
+.footer-brand {
+  color: var(--ink);
+  font-family: var(--display);
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.video-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(4,4,4,.9);
+  backdrop-filter: blur(12px);
+  opacity: 0;
+  visibility: hidden;
+  transition: .25s ease;
+}
+
+.video-modal.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-close {
+  position: absolute;
+  top: 28px;
+  right: 30px;
+  width: 48px;
+  height: 48px;
+  border: 1px solid #393632;
+  background: #0e0e0e;
+  color: var(--ink);
+  font-size: 30px;
+  cursor: pointer;
+  transition: .2s ease;
+}
+
+.modal-close:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  transform: rotate(6deg);
+}
+
+.video-shell {
+  width: min(1180px, 94vw);
+  aspect-ratio: 16/9;
+  border: 1px solid #373431;
+  background: #0b0b0b;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 0 7px rgba(228,79,40,.035), 0 30px 90px rgba(0,0,0,.5);
+}
+
+.video-embed,
+.video-embed iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.placeholder-panel {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  text-align: center;
+  gap: 16px;
+  padding: 30px;
+  background:
+    repeating-linear-gradient(-14deg, transparent 0 28px, rgba(228,79,40,.06) 28px 30px),
+    #0c0c0c;
+}
+
+.placeholder-panel.hidden {
+  display: none;
+}
+
+.placeholder-icon {
+  width: 84px;
+  height: 84px;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--accent);
+  font-size: 24px;
+}
+
+.placeholder-panel h3 {
+  margin: 0;
+  font-family: var(--display);
+  font-size: 54px;
+  text-transform: uppercase;
+}
+
+.placeholder-panel p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 980px) {
+  .desktop-nav {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+    padding-top: 130px;
+  }
+
+  .hero-art {
+    min-height: 450px;
+    margin-top: -50px;
+  }
+
+  .scroll-mark {
+    display: none;
+  }
+
+  .project-card,
+  .project-card:nth-child(3n),
+  .project-card:nth-child(4n) {
+    grid-column: span 12;
+  }
+
+  .about-section {
+    grid-template-columns: 1fr;
+  }
+
+  .about-mark {
+    position: relative;
+    top: auto;
+    max-width: 340px;
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .process-steps {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  footer {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 700px) {
+  .site-header {
+    height: 68px;
+    padding: 0 18px;
+  }
+
+  .brand-jkt {
+    font-size: 25px;
+  }
+
+  .brand-motion {
+    font-size: 14px;
+  }
+
+  .header-actions {
+    gap: 12px;
+  }
+
+  .language-switcher {
+    font-size: 13px;
+  }
+
+  .hero {
+    min-height: 100svh;
+    padding: 110px 20px 50px;
+    gap: 20px;
+  }
+
+  .hero h1 {
+    font-size: clamp(82px, 28vw, 132px);
+  }
+
+  .hero h1 .accent-outline {
+    margin-left: .04em;
+    -webkit-text-stroke-width: 1.5px;
+  }
+
+  .hero-tagline {
+    margin-top: 26px;
+  }
+
+  .hero-tagline p {
+    font-size: 26px;
+  }
+
+  .hero-cta {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 28px;
+  }
+
+  .hero-art {
+    min-height: 360px;
+    margin-top: -20px;
+  }
+
+  .hero-badge {
+    width: 180px;
+  }
+
+  .hero-badge strong {
+    font-size: 88px;
+  }
+
+  .section {
+    padding: 90px 20px;
+  }
+
+  .section-head {
+    align-items: flex-start;
+    flex-direction: column;
+    margin-bottom: 36px;
+  }
+
+  .section-head h2,
+  .about-copy h2,
+  .process-heading h2 {
+    font-size: 61px;
+  }
+
+  .project-card {
+    min-height: 380px;
+  }
+
+  .project-info {
+    inset: auto 18px 18px 18px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .project-status {
+    display: none;
+  }
+
+  .about-section {
+    gap: 52px;
+  }
+
+  .about-mark {
+    font-size: 110px;
+  }
+
+  .about-copy h2 {
+    font-size: 58px;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .service-card {
+    min-height: 235px;
+  }
+
+  .service-card h3 {
+    margin-top: 35px;
+  }
+
+  .process-section {
+    padding: 90px 20px;
+  }
+
+  .process-steps {
+    grid-template-columns: 1fr;
+    margin-top: 45px;
+  }
+
+  .process-step {
+    min-height: 190px;
+  }
+
+  .contact-section {
+    padding: 110px 20px 70px;
+  }
+
+  .contact-inner h2 {
+    font-size: clamp(64px, 22vw, 108px);
+  }
+
+  .contact-inner h2 .accent-outline {
+    -webkit-text-stroke-width: 1.5px;
+  }
+
+  .contact-links {
+    margin-top: 55px;
+  }
+
+  .contact-links a {
+    grid-template-columns: 1fr auto;
+    min-height: 100px;
+  }
+
+  .contact-links a > span:first-child {
+    grid-column: 1 / -1;
+    align-self: end;
+  }
+
+  .contact-links strong {
+    font-size: 25px;
+    word-break: break-word;
+  }
+
+  footer {
+    padding: 28px 20px 36px;
+  }
+
+  .video-modal {
+    padding: 10px;
+  }
+
+  .modal-close {
+    top: 18px;
+    right: 18px;
+    z-index: 3;
+  }
+
+  .video-shell {
+    width: 96vw;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto !important;
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+</style>
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="cursor-glow" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a href="#home" class="brand" aria-label="JKT Motion home">
+      <span class="brand-jkt">JKT</span>
+      <span class="brand-motion">MOTION</span>
+    </a>
+
+    <nav class="desktop-nav" aria-label="Primary navigation">
+      <a href="#work" data-i18n="nav.work">Portofoliu</a>
+      <a href="#about" data-i18n="nav.about">Despre</a>
+      <a href="#services" data-i18n="nav.services">Servicii</a>
+      <a href="#contact" data-i18n="nav.contact">Contact</a>
+    </nav>
+
+    <div class="header-actions">
+      <div class="language-switcher" aria-label="Language selector">
+        <button type="button" class="lang-btn active" data-lang="ro" aria-pressed="true">RO</button>
+        <span>/</span>
+        <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+
+      <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="mobile-menu" aria-hidden="true">
+    <a href="#work" data-i18n="nav.work">Portofoliu</a>
+    <a href="#about" data-i18n="nav.about">Despre</a>
+    <a href="#services" data-i18n="nav.services">Servicii</a>
+    <a href="#contact" data-i18n="nav.contact">Contact</a>
+  </div>
+
+  <main>
+    <section id="home" class="hero">
+      <div class="hero-lines" aria-hidden="true">
+        <svg viewBox="0 0 1200 750" preserveAspectRatio="none">
+          <path d="M-20 510 L115 470 L210 535 L325 455 L460 500 L590 420 L730 495 L860 385 L1005 445 L1220 340" />
+          <path d="M-10 160 L150 205 L245 140 L350 210 L480 125 L610 190 L760 110 L900 165 L1040 95 L1210 150" />
+        </svg>
+      </div>
+
+      <div class="hero-copy reveal">
+        <p class="eyebrow" data-i18n="hero.eyebrow">VIDEO EDITING · COLOR · SOUND</p>
+        <h1>
+          <span>JKT</span>
+          <span class="accent-outline">MOTION</span>
+        </h1>
+        <div class="hero-tagline">
+          <span class="slash">/</span>
+          <p data-i18n="hero.tagline">Haos controlat. Montaj cu impact.</p>
+        </div>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#work">
+            <span data-i18n="hero.ctaWork">Vezi portofoliul</span>
+            <span aria-hidden="true">↗</span>
+          </a>
+          <a class="text-link" href="#contact" data-i18n="hero.ctaContact">Hai să lucrăm împreună</a>
+        </div>
+      </div>
+
+      <div class="hero-art reveal" aria-hidden="true">
+        <div class="blast-ring ring-one"></div>
+        <div class="blast-ring ring-two"></div>
+        <div class="blast-ring ring-three"></div>
+        <div class="hero-badge">
+          <span>EDIT</span>
+          <strong>4K</strong>
+          <span>COLOR</span>
+        </div>
+        <div class="hero-zigzag"></div>
+        <div class="hero-cross cross-one">×</div>
+        <div class="hero-cross cross-two">×</div>
+        <div class="hero-spark spark-one"></div>
+        <div class="hero-spark spark-two"></div>
+      </div>
+
+      <div class="scroll-mark" aria-hidden="true">
+        <span data-i18n="hero.scroll">SCROLL</span>
+        <div></div>
+      </div>
+    </section>
+
+    <section class="ticker" aria-label="Services ticker">
+      <div class="ticker-track">
+        <span>AUTOMOTIVE</span><i>✦</i>
+        <span>EVENTS</span><i>✦</i>
+        <span>SOCIAL</span><i>✦</i>
+        <span>COLOR GRADING</span><i>✦</i>
+        <span>SOUND DESIGN</span><i>✦</i>
+        <span>4K EDITING</span><i>✦</i>
+        <span>AUTOMOTIVE</span><i>✦</i>
+        <span>EVENTS</span><i>✦</i>
+        <span>SOCIAL</span><i>✦</i>
+        <span>COLOR GRADING</span><i>✦</i>
+        <span>SOUND DESIGN</span><i>✦</i>
+        <span>4K EDITING</span><i>✦</i>
+      </div>
+    </section>
+
+    <section id="work" class="section work-section">
+      <div class="section-head reveal">
+        <div>
+          <p class="section-kicker">01 — SELECTED WORK</p>
+          <h2 data-i18n="work.title">Portofoliu</h2>
+        </div>
+        <p class="section-note" data-i18n="work.note">
+          Videoclipurile reale vor fi adăugate aici. Structura este deja pregătită pentru YouTube.
+        </p>
+      </div>
+
+      <div id="projectGrid" class="project-grid"></div>
+    </section>
+
+    <section id="about" class="section about-section">
+      <div class="about-mark reveal" aria-hidden="true">
+        <span>JKT</span>
+        <span>///</span>
+      </div>
+
+      <div class="about-copy reveal">
+        <p class="section-kicker">02 — ABOUT</p>
+        <h2 data-i18n="about.title">Editare construită pentru ritm, imagine și energie.</h2>
+        <div class="about-text">
+          <p data-i18n="about.p1">
+            Sunt editor video cu peste un an de experiență, axat în principal pe montaje auto, videoclipuri de eveniment și conținut pentru social media.
+          </p>
+          <p data-i18n="about.p2">
+            Am experiență și cu materiale de prezentare și promovare pentru evenimente, vloguri și proiecte în formate diverse, de la clipuri verticale scurte până la materiale long-form.
+          </p>
+          <p data-i18n="about.p3">
+            Lucrez în prezent în DaVinci Resolve Studio, după trecerea de la Adobe Premiere Pro.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="section services-section">
+      <div class="section-head reveal">
+        <div>
+          <p class="section-kicker">03 — WHAT I DO</p>
+          <h2 data-i18n="services.title">Servicii</h2>
+        </div>
+      </div>
+
+      <div class="services-grid">
+        <article class="service-card reveal">
+          <span class="service-index">01</span>
+          <h3>EDIT</h3>
+          <p data-i18n="services.edit">Editare video până la 4K, short-form și long-form, vertical și orizontal.</p>
+        </article>
+
+        <article class="service-card reveal">
+          <span class="service-index">02</span>
+          <h3>COLOR</h3>
+          <p data-i18n="services.color">Color correction și color grading, inclusiv material filmat în LOG.</p>
+        </article>
+
+        <article class="service-card reveal">
+          <span class="service-index">03</span>
+          <h3>SOUND</h3>
+          <p data-i18n="services.sound">Sound design, efecte audio și finisarea mixului pentru mai mult impact.</p>
+        </article>
+
+        <article class="service-card reveal">
+          <span class="service-index">04</span>
+          <h3>TEXT</h3>
+          <p data-i18n="services.text">Subtitrări simple sau animate, cu efecte adaptate stilului proiectului.</p>
+        </article>
+
+        <article class="service-card reveal">
+          <span class="service-index">05</span>
+          <h3>CONTENT</h3>
+          <p data-i18n="services.content">Automotive, evenimente, promovare, vloguri și social media.</p>
+        </article>
+
+        <article class="service-card reveal">
+          <span class="service-index">06</span>
+          <h3>REVISION</h3>
+          <p data-i18n="services.revision">Revizii și comunicare pe tot parcursul proiectului.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="process-section">
+      <div class="process-line" aria-hidden="true"></div>
+      <div class="process-inner">
+        <div class="process-heading reveal">
+          <p class="section-kicker">04 — PROCESS</p>
+          <h2 data-i18n="process.title">De la material brut la un video care lovește.</h2>
+        </div>
+
+        <div class="process-steps">
+          <div class="process-step reveal">
+            <span>01</span>
+            <h3 data-i18n="process.step1Title">Brief</h3>
+            <p data-i18n="process.step1Text">Stabilim direcția, formatul, ritmul și referințele.</p>
+          </div>
+          <div class="process-step reveal">
+            <span>02</span>
+            <h3 data-i18n="process.step2Title">Edit</h3>
+            <p data-i18n="process.step2Text">Construiesc montajul, sound design-ul și flow-ul vizual.</p>
+          </div>
+          <div class="process-step reveal">
+            <span>03</span>
+            <h3 data-i18n="process.step3Title">Polish</h3>
+            <p data-i18n="process.step3Text">Color, subtitrări, detalii și finisajul final.</p>
+          </div>
+          <div class="process-step reveal">
+            <span>04</span>
+            <h3 data-i18n="process.step4Title">Deliver</h3>
+            <p data-i18n="process.step4Text">Exportul final în formatele necesare și revizii.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+      <div class="contact-scribble" aria-hidden="true">
+        <svg viewBox="0 0 900 250" preserveAspectRatio="none">
+          <path d="M10 170 C140 40, 270 220, 410 105 S680 235, 890 55" />
+        </svg>
+      </div>
+
+      <div class="contact-inner reveal">
+        <p class="section-kicker">05 — CONTACT</p>
+        <h2>
+          <span data-i18n="contact.line1">LET’S MAKE</span>
+          <span class="accent-outline" data-i18n="contact.line2">SOMETHING MOVE.</span>
+        </h2>
+
+        <div class="contact-links">
+          <a href="https://www.instagram.com/iampaul_8/" target="_blank" rel="noopener noreferrer">
+            <span>Instagram</span>
+            <strong>@iampaul_8</strong>
+            <span aria-hidden="true">↗</span>
+          </a>
+          <a href="mailto:businessonlypaul@yahoo.com">
+            <span>Email</span>
+            <strong>businessonlypaul@yahoo.com</strong>
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-brand">JKT MOTION</div>
+    <p data-i18n="footer.copy">Video editing · Color · Sound</p>
+    <p>© <span id="year"></span> JKT Motion</p>
+  </footer>
+
+  <div id="videoModal" class="video-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Video player">
+    <button class="modal-close" type="button" aria-label="Close video">×</button>
+    <div class="video-shell">
+      <div id="videoEmbed" class="video-embed"></div>
+      <div id="placeholderPanel" class="placeholder-panel">
+        <div class="placeholder-icon">▶</div>
+        <h3 data-i18n="modal.placeholderTitle">Video în curând</h3>
+        <p data-i18n="modal.placeholderText">Acest proiect este pregătit pentru un link YouTube.</p>
+      </div>
+    </div>
+  </div>
+
+<script>
+const translations = {
+  ro: {
+    "nav.work": "Portofoliu",
+    "nav.about": "Despre",
+    "nav.services": "Servicii",
+    "nav.contact": "Contact",
+
+    "hero.eyebrow": "VIDEO EDITING · COLOR · SOUND",
+    "hero.tagline": "Haos controlat. Montaj cu impact.",
+    "hero.ctaWork": "Vezi portofoliul",
+    "hero.ctaContact": "Hai să lucrăm împreună",
+    "hero.scroll": "SCROLL",
+
+    "work.title": "Portofoliu",
+    "work.note": "Videoclipurile reale vor fi adăugate aici. Structura este deja pregătită pentru YouTube.",
+
+    "about.title": "Editare construită pentru ritm, imagine și energie.",
+    "about.p1": "Sunt editor video cu peste un an de experiență, axat în principal pe montaje auto, videoclipuri de eveniment și conținut pentru social media.",
+    "about.p2": "Am experiență și cu materiale de prezentare și promovare pentru evenimente, vloguri și proiecte în formate diverse, de la clipuri verticale scurte până la materiale long-form.",
+    "about.p3": "Lucrez în prezent în DaVinci Resolve Studio, după trecerea de la Adobe Premiere Pro.",
+
+    "services.title": "Servicii",
+    "services.edit": "Editare video până la 4K, short-form și long-form, vertical și orizontal.",
+    "services.color": "Color correction și color grading, inclusiv material filmat în LOG.",
+    "services.sound": "Sound design, efecte audio și finisarea mixului pentru mai mult impact.",
+    "services.text": "Subtitrări simple sau animate, cu efecte adaptate stilului proiectului.",
+    "services.content": "Automotive, evenimente, promovare, vloguri și social media.",
+    "services.revision": "Revizii și comunicare pe tot parcursul proiectului.",
+
+    "process.title": "De la material brut la un video care lovește.",
+    "process.step1Title": "Brief",
+    "process.step1Text": "Stabilim direcția, formatul, ritmul și referințele.",
+    "process.step2Title": "Edit",
+    "process.step2Text": "Construiesc montajul, sound design-ul și flow-ul vizual.",
+    "process.step3Title": "Polish",
+    "process.step3Text": "Color, subtitrări, detalii și finisajul final.",
+    "process.step4Title": "Deliver",
+    "process.step4Text": "Exportul final în formatele necesare și revizii.",
+
+    "contact.line1": "LET’S MAKE",
+    "contact.line2": "SOMETHING MOVE.",
+    "footer.copy": "Video editing · Color · Sound",
+
+    "modal.placeholderTitle": "Video în curând",
+    "modal.placeholderText": "Acest proiect este pregătit pentru un link YouTube.",
+
+    "project.placeholder": "În curând",
+    "project.watch": "Deschide"
+  },
+  en: {
+    "nav.work": "Work",
+    "nav.about": "About",
+    "nav.services": "Services",
+    "nav.contact": "Contact",
+
+    "hero.eyebrow": "VIDEO EDITING · COLOR · SOUND",
+    "hero.tagline": "Controlled chaos. Editing with impact.",
+    "hero.ctaWork": "View work",
+    "hero.ctaContact": "Let's work together",
+    "hero.scroll": "SCROLL",
+
+    "work.title": "Selected Work",
+    "work.note": "The final videos will be added here. The site is already prepared for YouTube links.",
+
+    "about.title": "Editing built around rhythm, image and energy.",
+    "about.p1": "I'm a video editor with over a year of experience, focused mainly on automotive edits, event videos and social media content.",
+    "about.p2": "I also have experience with event presentation and promotional videos, vlogs, and projects across different formats — from short vertical content to long-form edits.",
+    "about.p3": "I currently work in DaVinci Resolve Studio, after moving from Adobe Premiere Pro.",
+
+    "services.title": "Services",
+    "services.edit": "Video editing up to 4K, short-form and long-form, vertical and horizontal.",
+    "services.color": "Color correction and color grading, including LOG footage.",
+    "services.sound": "Sound design, audio effects and final mix polish for stronger impact.",
+    "services.text": "Simple or animated subtitles, with effects adapted to the project's style.",
+    "services.content": "Automotive, events, promo videos, vlogs and social media content.",
+    "services.revision": "Revisions and communication throughout the entire project.",
+
+    "process.title": "From raw footage to a video that hits.",
+    "process.step1Title": "Brief",
+    "process.step1Text": "We define the direction, format, rhythm and references.",
+    "process.step2Title": "Edit",
+    "process.step2Text": "I build the cut, sound design and visual flow.",
+    "process.step3Title": "Polish",
+    "process.step3Text": "Color, subtitles, details and final polish.",
+    "process.step4Title": "Deliver",
+    "process.step4Text": "Final export in the required formats, plus revisions.",
+
+    "contact.line1": "LET’S MAKE",
+    "contact.line2": "SOMETHING MOVE.",
+    "footer.copy": "Video editing · Color · Sound",
+
+    "modal.placeholderTitle": "Video coming soon",
+    "modal.placeholderText": "This project slot is ready for a YouTube link.",
+
+    "project.placeholder": "Coming soon",
+    "project.watch": "Open"
+  }
+};
+
+/*
+  PORTFOLIO CONFIG
+  ----------------
+  To add a real YouTube video later:
+  1. Paste its URL into the `youtube` field.
+  2. Example:
+     youtube: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+  3. You can also change title/category/format.
+
+  When a YouTube URL is present, the site automatically opens the embedded video.
+*/
+const projects = [
+  {
+    title: { ro: "Automotive Edit 01", en: "Automotive Edit 01" },
+    category: "AUTOMOTIVE",
+    format: "16:9",
+    youtube: ""
+  },
+  {
+    title: { ro: "Event Highlight 01", en: "Event Highlight 01" },
+    category: "EVENT",
+    format: "16:9",
+    youtube: ""
+  },
+  {
+    title: { ro: "Social Cut 01", en: "Social Cut 01" },
+    category: "SOCIAL",
+    format: "9:16",
+    youtube: ""
+  },
+  {
+    title: { ro: "Promo Video 01", en: "Promo Video 01" },
+    category: "PROMO",
+    format: "16:9",
+    youtube: ""
+  },
+  {
+    title: { ro: "Automotive Edit 02", en: "Automotive Edit 02" },
+    category: "AUTOMOTIVE",
+    format: "16:9",
+    youtube: ""
+  },
+  {
+    title: { ro: "Vlog Edit 01", en: "Vlog Edit 01" },
+    category: "VLOG",
+    format: "16:9",
+    youtube: ""
+  }
+];
+
+let currentLang = "ro";
+
+const projectGrid = document.getElementById("projectGrid");
+const modal = document.getElementById("videoModal");
+const videoEmbed = document.getElementById("videoEmbed");
+const placeholderPanel = document.getElementById("placeholderPanel");
+const modalClose = document.querySelector(".modal-close");
+const menuToggle = document.querySelector(".menu-toggle");
+const mobileMenu = document.querySelector(".mobile-menu");
+
+function extractYouTubeId(url) {
+  if (!url) return null;
+
+  const patterns = [
+    /youtube\.com\/watch\?v=([^&]+)/,
+    /youtu\.be\/([^?&]+)/,
+    /youtube\.com\/shorts\/([^?&]+)/,
+    /youtube\.com\/embed\/([^?&]+)/
+  ];
+
+  for (const pattern of patterns) {
+    const match = url.match(pattern);
+    if (match && match[1]) return match[1];
+  }
+
+  return null;
+}
+
+function renderProjects() {
+  if (!projectGrid) return;
+
+  projectGrid.innerHTML = projects.map((project, index) => {
+    const number = String(index + 1).padStart(2, "0");
+    const hasVideo = Boolean(extractYouTubeId(project.youtube));
+    const status = hasVideo
+      ? translations[currentLang]["project.watch"]
+      : translations[currentLang]["project.placeholder"];
+
+    return `
+      <article class="project-card reveal ${hasVideo ? "has-video" : ""}" data-project="${index}" tabindex="0" role="button" aria-label="${project.title[currentLang]}">
+        <div class="project-thumb" aria-hidden="true">
+          <div class="project-no">${number}</div>
+          <div class="project-play">▶</div>
+        </div>
+        <div class="project-info">
+          <div>
+            <div class="project-meta">
+              <span>${project.category}</span>
+              <span>${project.format}</span>
+            </div>
+            <h3 class="project-title">${project.title[currentLang]}</h3>
+          </div>
+          <div class="project-status">${status}</div>
+        </div>
+      </article>
+    `;
+  }).join("");
+
+  projectGrid.querySelectorAll(".project-card").forEach(card => {
+    const open = () => openProject(Number(card.dataset.project));
+    card.addEventListener("click", open);
+    card.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        open();
+      }
+    });
+  });
+
+  observeReveals();
+}
+
+function openProject(index) {
+  const project = projects[index];
+  const id = extractYouTubeId(project.youtube);
+
+  videoEmbed.innerHTML = "";
+
+  if (id) {
+    placeholderPanel.classList.add("hidden");
+    videoEmbed.innerHTML = `
+      <iframe
+        src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0"
+        title="${project.title[currentLang]}"
+        allow="autoplay; encrypted-media; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    `;
+  } else {
+    placeholderPanel.classList.remove("hidden");
+  }
+
+  modal.classList.add("open");
+  modal.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+  modalClose.focus();
+}
+
+function closeModal() {
+  modal.classList.remove("open");
+  modal.setAttribute("aria-hidden", "true");
+  videoEmbed.innerHTML = "";
+  document.body.style.overflow = "";
+}
+
+function setLanguage(lang) {
+  currentLang = translations[lang] ? lang : "ro";
+  document.documentElement.lang = currentLang;
+  document.documentElement.dataset.lang = currentLang;
+
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const key = el.dataset.i18n;
+    if (translations[currentLang][key] !== undefined) {
+      el.textContent = translations[currentLang][key];
+    }
+  });
+
+  document.querySelectorAll(".lang-btn").forEach(btn => {
+    const active = btn.dataset.lang === currentLang;
+    btn.classList.toggle("active", active);
+    btn.setAttribute("aria-pressed", String(active));
+  });
+
+  localStorage.setItem("jkt-motion-language", currentLang);
+  renderProjects();
+}
+
+function getInitialLanguage() {
+  const saved = localStorage.getItem("jkt-motion-language");
+  if (saved && translations[saved]) return saved;
+
+  const browserLang = (navigator.language || "ro").toLowerCase();
+  return browserLang.startsWith("ro") ? "ro" : "en";
+}
+
+function observeReveals() {
+  const items = document.querySelectorAll(".reveal:not(.visible)");
+
+  if (!("IntersectionObserver" in window)) {
+    items.forEach(item => item.classList.add("visible"));
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  items.forEach(item => observer.observe(item));
+}
+
+document.querySelectorAll(".lang-btn").forEach(btn => {
+  btn.addEventListener("click", () => setLanguage(btn.dataset.lang));
+});
+
+modalClose.addEventListener("click", closeModal);
+
+modal.addEventListener("click", (event) => {
+  if (event.target === modal) closeModal();
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && modal.classList.contains("open")) {
+    closeModal();
+  }
+});
+
+menuToggle.addEventListener("click", () => {
+  const open = !mobileMenu.classList.contains("open");
+  mobileMenu.classList.toggle("open", open);
+  menuToggle.classList.toggle("active", open);
+  menuToggle.setAttribute("aria-expanded", String(open));
+  mobileMenu.setAttribute("aria-hidden", String(!open));
+  document.body.classList.toggle("menu-open", open);
+});
+
+mobileMenu.querySelectorAll("a").forEach(link => {
+  link.addEventListener("click", () => {
+    mobileMenu.classList.remove("open");
+    menuToggle.classList.remove("active");
+    menuToggle.setAttribute("aria-expanded", "false");
+    mobileMenu.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("menu-open");
+  });
+});
+
+if (window.matchMedia("(pointer:fine)").matches) {
+  const glow = document.querySelector(".cursor-glow");
+  document.addEventListener("mousemove", (event) => {
+    glow.style.left = `${event.clientX}px`;
+    glow.style.top = `${event.clientY}px`;
+    glow.style.opacity = "1";
+  });
+}
+
+document.getElementById("year").textContent = new Date().getFullYear();
+
+setLanguage(getInitialLanguage());
+observeReveals();
+
+</script>
+</body>
+</html>
