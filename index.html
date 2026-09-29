@@ -2315,6 +2315,157 @@ footer {
   }
 }
 
+
+/* ===== GROUPED PORTFOLIO PROJECTS ===== */
+
+.project-group {
+  min-height: 540px;
+  background-image:
+    linear-gradient(to top, rgba(7,7,7,.98) 0%, rgba(7,7,7,.62) 33%, rgba(7,7,7,.18) 68%, rgba(7,7,7,.28) 100%),
+    var(--thumb);
+  background-size: cover;
+  background-position: center;
+  cursor: default;
+}
+
+.project-group::before {
+  opacity: .10;
+}
+
+.project-group:hover {
+  transform: translateY(-4px) rotate(-.15deg);
+}
+
+.project-group .project-no {
+  opacity: .55;
+}
+
+.project-count {
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  z-index: 4;
+  padding: 7px 10px;
+  border: 1px solid rgba(240,233,223,.22);
+  background: rgba(7,7,7,.72);
+  backdrop-filter: blur(9px);
+  color: #d9d2c9;
+  font-family: var(--display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.project-info-group {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 24px;
+}
+
+.project-copy {
+  min-width: 0;
+}
+
+.project-subtitle {
+  margin: 8px 0 0;
+  color: #b7afa6;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.project-video-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 138px;
+}
+
+.project-video-chip {
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 12px;
+  border: 1px solid rgba(240,233,223,.22);
+  background: rgba(9,9,9,.72);
+  color: var(--ink);
+  font-family: var(--display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  cursor: pointer;
+  backdrop-filter: blur(9px);
+  transition: .2s ease;
+}
+
+.project-video-chip:hover {
+  background: var(--accent);
+  color: #080808;
+  border-color: var(--accent);
+  transform: translateX(-3px) rotate(-.5deg);
+}
+
+.project-video-chip span:last-child {
+  font-size: 10px;
+}
+
+.project-grid .project-group:nth-child(1) {
+  grid-column: span 7;
+}
+
+.project-grid .project-group:nth-child(2) {
+  grid-column: span 5;
+}
+
+.project-grid .project-group:nth-child(3) {
+  grid-column: span 5;
+}
+
+.project-grid .project-group:nth-child(4) {
+  grid-column: span 7;
+}
+
+@media (max-width: 980px) {
+  .project-grid .project-group:nth-child(n) {
+    grid-column: span 12;
+  }
+}
+
+@media (max-width: 700px) {
+  .project-group {
+    min-height: 455px;
+  }
+
+  .project-info-group {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .project-video-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    min-width: 0;
+  }
+
+  .project-video-chip {
+    min-width: 112px;
+    flex: 0 0 auto;
+  }
+
+  .project-count {
+    top: 16px;
+    right: 16px;
+    font-size: 10px;
+  }
+
+  .project-subtitle {
+    font-size: 12px;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -2628,7 +2779,7 @@ const translations = {
     "manifesto.main": "TĂIETURI CURATE. ENERGIE BRUTĂ.",
 
     "work.title": "Portofoliu",
-    "work.note": "Selecția video este în curs de actualizare. Proiectele finale vor apărea aici.",
+    "work.note": "O selecție de proiecte video, grupate după eveniment și tipul de producție.",
 
     "about.title": "Editare construită pentru ritm, imagine și energie.",
     "about.p1": "Sunt editor video cu peste un an de experiență, axat în principal pe montaje auto, videoclipuri de eveniment și conținut pentru social media.",
@@ -2661,7 +2812,10 @@ const translations = {
     "modal.placeholderText": "Acest proiect este pregătit pentru un link YouTube.",
 
     "project.placeholder": "În actualizare",
-    "project.watch": "Deschide"
+    "project.watch": "Deschide",
+    "project.videos": "videoclipuri",
+    "project.video": "videoclip",
+    "project.open": "Vezi proiectul"
   },
   en: {
     "nav.work": "Work",
@@ -2678,7 +2832,7 @@ const translations = {
     "manifesto.main": "CLEAN CUTS. DIRTY ENERGY.",
 
     "work.title": "Selected Work",
-    "work.note": "The selected work is currently being updated. Final projects will appear here.",
+    "work.note": "A selection of video projects, grouped by event and production type.",
 
     "about.title": "Editing built around rhythm, image and energy.",
     "about.p1": "I'm a video editor with over a year of experience, focused mainly on automotive edits, event videos and social media content.",
@@ -2711,7 +2865,10 @@ const translations = {
     "modal.placeholderText": "This project slot is ready for a YouTube link.",
 
     "project.placeholder": "Updating",
-    "project.watch": "Open"
+    "project.watch": "Open",
+    "project.videos": "videos",
+    "project.video": "video",
+    "project.open": "View project"
   }
 };
 
@@ -2726,42 +2883,46 @@ const translations = {
 
   When a YouTube URL is present, the site automatically opens the embedded video.
 */
-const projects = [
+const projectGroups = [
   {
-    title: { ro: "Automotive Edit 01", en: "Automotive Edit 01" },
-    category: "AUTOMOTIVE",
+    title: { ro: "Comicon", en: "Comicon" },
+    category: { ro: "EVENIMENT", en: "EVENT" },
+    subtitle: { ro: "Event coverage", en: "Event coverage" },
     format: "16:9",
-    youtube: ""
+    videos: [
+      "https://youtu.be/lTIo48KJJEw",
+      "https://youtu.be/xzxqvUpZSdY?list=PLX28ojsGrQhA",
+      "https://youtu.be/skghgPjGWeU?list=PLX28ojsGrQhA"
+    ]
   },
   {
-    title: { ro: "Event Highlight 01", en: "Event Highlight 01" },
-    category: "EVENT",
+    title: { ro: "Prezentare Pârtie", en: "Ski Slope Presentation" },
+    category: { ro: "PROMO", en: "PROMO" },
+    subtitle: { ro: "Prezentare / promovare", en: "Presentation / promotion" },
     format: "16:9",
-    youtube: ""
+    videos: [
+      "https://youtu.be/vgzc6VIDVKE?list=PLX28ojsGrQhA",
+      "https://youtu.be/MjKFV1EMBaw?list=PLX28ojsGrQhA"
+    ]
   },
   {
-    title: { ro: "Social Cut 01", en: "Social Cut 01" },
-    category: "SOCIAL",
-    format: "9:16",
-    youtube: ""
+    title: { ro: "Saisho", en: "Saisho" },
+    category: { ro: "AUTOMOTIVE", en: "AUTOMOTIVE" },
+    subtitle: { ro: "Car event", en: "Car event" },
+    format: "16:9",
+    videos: [
+      "https://youtu.be/wZGqgyPaMD0?list=PLX28ojsGrQhA"
+    ]
   },
   {
-    title: { ro: "Promo Video 01", en: "Promo Video 01" },
-    category: "PROMO",
+    title: { ro: "Off Road", en: "Off Road" },
+    category: { ro: "AUTOMOTIVE", en: "AUTOMOTIVE" },
+    subtitle: { ro: "Off-road event", en: "Off-road event" },
     format: "16:9",
-    youtube: ""
-  },
-  {
-    title: { ro: "Automotive Edit 02", en: "Automotive Edit 02" },
-    category: "AUTOMOTIVE",
-    format: "16:9",
-    youtube: ""
-  },
-  {
-    title: { ro: "Vlog Edit 01", en: "Vlog Edit 01" },
-    category: "VLOG",
-    format: "16:9",
-    youtube: ""
+    videos: [
+      "https://youtu.be/-Jo_FbT-re4?list=PLX28ojsGrQhA",
+      "https://youtu.be/IQUI6fqsniI?list=PLX28ojsGrQhA"
+    ]
   }
 ];
 
@@ -2797,69 +2958,84 @@ function extractYouTubeId(url) {
 function renderProjects() {
   if (!projectGrid) return;
 
-  projectGrid.innerHTML = projects.map((project, index) => {
-    const number = String(index + 1).padStart(2, "0");
-    const videoId = extractYouTubeId(project.youtube);
-    const hasVideo = Boolean(videoId);
-    const status = hasVideo
-      ? translations[currentLang]["project.watch"]
-      : translations[currentLang]["project.placeholder"];
-    const thumbStyle = hasVideo
-      ? `style="--thumb:url('https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg')"`
+  projectGrid.innerHTML = projectGroups.map((group, groupIndex) => {
+    const number = String(groupIndex + 1).padStart(2, "0");
+    const firstId = extractYouTubeId(group.videos[0]);
+    const thumbStyle = firstId
+      ? `style="--thumb:url('https://i.ytimg.com/vi/${firstId}/maxresdefault.jpg')"`
       : "";
+    const countLabel = group.videos.length === 1
+      ? translations[currentLang]["project.video"]
+      : translations[currentLang]["project.videos"];
+
+    const videoButtons = group.videos.map((url, videoIndex) => {
+      const id = extractYouTubeId(url);
+      const label = String(videoIndex + 1).padStart(2, "0");
+      return `
+        <button class="project-video-chip"
+          type="button"
+          data-group="${groupIndex}"
+          data-video="${videoIndex}"
+          aria-label="${group.title[currentLang]} — Video ${label}">
+          <span>VIDEO ${label}</span>
+          <span aria-hidden="true">▶</span>
+        </button>
+      `;
+    }).join("");
 
     return `
-      <article
-        class="project-card reveal ${hasVideo ? "has-video" : ""}"
-        data-project="${index}"
-        ${hasVideo ? 'tabindex="0" role="button"' : ""}
-        aria-label="${project.title[currentLang]}"
-        ${thumbStyle}>
+      <article class="project-card project-group reveal has-video" ${thumbStyle}>
         <div class="project-thumb" aria-hidden="true">
           <div class="project-no">${number}</div>
-          <div class="project-play">${hasVideo ? "▶" : "SOON"}</div>
         </div>
-        <div class="project-info">
-          <div>
+
+        <div class="project-count">${group.videos.length} ${countLabel}</div>
+
+        <div class="project-info project-info-group">
+          <div class="project-copy">
             <div class="project-meta">
-              <span>${project.category}</span>
-              <span>${project.format}</span>
+              <span>${group.category[currentLang]}</span>
+              <span>${group.format}</span>
             </div>
-            <h3 class="project-title">${project.title[currentLang]}</h3>
+            <h3 class="project-title">${group.title[currentLang]}</h3>
+            <p class="project-subtitle">${group.subtitle[currentLang]}</p>
           </div>
-          <div class="project-status">${status}</div>
+
+          <div class="project-video-list">
+            ${videoButtons}
+          </div>
         </div>
       </article>
     `;
   }).join("");
 
-  projectGrid.querySelectorAll(".project-card.has-video").forEach(card => {
-    const open = () => openProject(Number(card.dataset.project));
-    card.addEventListener("click", open);
-    card.addEventListener("keydown", (event) => {
-      if (event.key === "Enter" || event.key === " ") {
-        event.preventDefault();
-        open();
-      }
+  projectGrid.querySelectorAll(".project-video-chip").forEach(button => {
+    button.addEventListener("click", (event) => {
+      event.stopPropagation();
+      openProjectVideo(
+        Number(button.dataset.group),
+        Number(button.dataset.video)
+      );
     });
   });
 
   observeReveals();
 }
 
-function openProject(index) {
-  const project = projects[index];
-  const id = extractYouTubeId(project.youtube);
+function openProjectVideo(groupIndex, videoIndex) {
+  const group = projectGroups[groupIndex];
+  const url = group.videos[videoIndex];
+  const id = extractYouTubeId(url);
 
   videoEmbed.innerHTML = "";
-  videoShell.classList.toggle("vertical", project.format === "9:16");
+  videoShell.classList.toggle("vertical", group.format === "9:16");
 
   if (id) {
     placeholderPanel.classList.add("hidden");
     videoEmbed.innerHTML = `
       <iframe
         src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0"
-        title="${project.title[currentLang]}"
+        title="${group.title[currentLang]} — Video ${videoIndex + 1}"
         allow="autoplay; encrypted-media; picture-in-picture"
         allowfullscreen>
       </iframe>
