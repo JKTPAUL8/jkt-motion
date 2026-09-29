@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="JKT Motion — video editing, color grading, sound design și content pentru automotive, evenimente și social media." />
   <meta name="theme-color" content="#0a0a0a" />
+  <meta property="og:title" content="JKT Motion — Video Editor" />
+  <meta property="og:description" content="Video editing, color grading și sound design pentru automotive, evenimente, promo și social media." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="color-scheme" content="dark" />
   <title>JKT Motion — Video Editor</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%23090909'/%3E%3Cpath d='M9 45 19 17h9l-5 14 12-14h11L33 31l12 14H34l-9-10-4 10Z' fill='%23e44f28'/%3E%3C/svg%3E" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1432,9 +1437,322 @@ footer {
   }
 }
 
+
+/* ===== JKT MOTION — FINISHING PASS ===== */
+.scroll-progress {
+  position: fixed;
+  z-index: 120;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-deep), var(--accent-warm));
+  transform: scaleX(0);
+  transform-origin: left center;
+  pointer-events: none;
+  box-shadow: 0 0 14px rgba(228,79,40,.5);
+}
+
+.site-header {
+  transition: height .25s ease, background .25s ease, border-color .25s ease;
+  border-bottom: 1px solid transparent;
+}
+
+.site-header.scrolled {
+  background: rgba(9,9,9,.86);
+  border-bottom-color: rgba(240,233,223,.07);
+}
+
+.desktop-nav a {
+  position: relative;
+}
+
+.desktop-nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 100%;
+  bottom: -8px;
+  height: 2px;
+  background: var(--accent);
+  transform: rotate(-2deg);
+  transition: right .25s ease;
+}
+
+.desktop-nav a:hover::after,
+.desktop-nav a.active::after {
+  right: 0;
+}
+
+.desktop-nav a.active {
+  color: var(--ink);
+}
+
+.section-note {
+  color: #b8b1a8;
+}
+
+.project-card {
+  min-height: 440px;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.01);
+}
+
+.project-card.has-video {
+  background-image:
+    linear-gradient(to top, rgba(8,8,8,.94) 0%, rgba(8,8,8,.18) 56%, rgba(8,8,8,.35) 100%),
+    var(--thumb);
+  background-size: cover;
+  background-position: center;
+}
+
+.project-card.has-video::before {
+  opacity: .12;
+}
+
+.project-card:not(.has-video) {
+  cursor: default;
+}
+
+.project-card:not(.has-video):hover {
+  transform: translateY(-2px);
+}
+
+.project-card:not(.has-video) .project-play {
+  border-style: dashed;
+  color: var(--accent);
+  border-color: rgba(228,79,40,.5);
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: .12em;
+}
+
+.project-card:nth-child(6n+1) .project-no { transform: rotate(-6deg) translate(-7%, 2%); }
+.project-card:nth-child(6n+2) .project-no { transform: rotate(5deg) translate(8%, -2%); }
+.project-card:nth-child(6n+3) .project-no { transform: rotate(-10deg) scale(1.08); }
+.project-card:nth-child(6n+4) .project-no { transform: rotate(8deg) scale(.96); }
+.project-card:nth-child(6n+5) .project-no { transform: rotate(-3deg) translateY(3%); }
+.project-card:nth-child(6n+6) .project-no { transform: rotate(6deg) translateX(-4%); }
+
+.project-card:nth-child(odd)::after {
+  border-radius: 43% 57% 50% 50%;
+}
+
+.project-card:nth-child(even)::after {
+  transform: rotate(17deg);
+  border-radius: 0;
+}
+
+.project-card .project-info {
+  z-index: 3;
+}
+
+.project-card.has-video .project-info {
+  text-shadow: 0 2px 20px rgba(0,0,0,.6);
+}
+
+.project-card.has-video .project-meta span {
+  background: rgba(9,9,9,.72);
+  border-color: rgba(240,233,223,.22);
+  color: #d7d0c6;
+}
+
+.video-shell.vertical {
+  width: min(430px, 86vw);
+  aspect-ratio: 9/16;
+  max-height: 88vh;
+}
+
+.contact-links a strong {
+  transition: letter-spacing .2s ease;
+}
+
+.contact-links a:hover strong {
+  letter-spacing: .015em;
+}
+
+.reveal:nth-child(2n) { transition-delay: .045s; }
+.reveal:nth-child(3n) { transition-delay: .08s; }
+
+@media (max-width: 700px) {
+  .site-header {
+    height: 66px;
+    padding-inline: 18px;
+  }
+
+  .site-header.scrolled {
+    background: rgba(9,9,9,.93);
+  }
+
+  .hero {
+    min-height: auto;
+    padding: 100px 20px 34px;
+    gap: 0;
+  }
+
+  .eyebrow {
+    margin-bottom: 15px;
+  }
+
+  .hero h1 {
+    font-size: clamp(78px, 26vw, 118px);
+    line-height: .70;
+  }
+
+  .hero-tagline {
+    margin-top: 22px;
+  }
+
+  .hero-tagline p {
+    font-size: 25px;
+    max-width: 290px;
+  }
+
+  .hero-cta {
+    margin-top: 24px;
+    gap: 15px;
+  }
+
+  .btn {
+    min-height: 50px;
+  }
+
+  .hero-art {
+    min-height: 285px;
+    margin-top: -30px;
+  }
+
+  .hero-badge {
+    width: 156px;
+  }
+
+  .hero-badge strong {
+    font-size: 76px;
+  }
+
+  .hero-badge span {
+    font-size: 12px;
+  }
+
+  .ring-one { width: 72%; }
+  .ring-two { width: 54%; }
+  .ring-three { width: 37%; }
+
+  .hero-cross {
+    font-size: 34px;
+  }
+
+  .hero-zigzag {
+    bottom: 9%;
+    opacity: .075;
+  }
+
+  .ticker-track {
+    padding: 10px 0;
+    animation-duration: 23s;
+  }
+
+  .ticker span {
+    font-size: 17px;
+    padding-inline: 18px;
+  }
+
+  .section {
+    padding: 78px 20px;
+  }
+
+  .section-head {
+    margin-bottom: 30px;
+    gap: 20px;
+  }
+
+  .section-note {
+    color: #b7b0a7;
+    font-size: 13.5px;
+    line-height: 1.65;
+  }
+
+  .project-grid {
+    gap: 16px;
+  }
+
+  .project-card {
+    min-height: 330px;
+  }
+
+  .project-no {
+    font-size: clamp(145px, 48vw, 210px);
+  }
+
+  .project-play {
+    width: 62px;
+    height: 62px;
+  }
+
+  .project-title {
+    font-size: 36px;
+  }
+
+  .about-section {
+    padding-top: 82px;
+  }
+
+  .about-mark {
+    font-size: 96px;
+  }
+
+  .about-text {
+    margin-top: 32px;
+    font-size: 15.5px;
+    line-height: 1.72;
+  }
+
+  .service-card {
+    min-height: 210px;
+    padding: 24px;
+  }
+
+  .service-card h3 {
+    font-size: 48px;
+    margin-top: 30px;
+  }
+
+  .process-section {
+    padding: 82px 20px;
+  }
+
+  .process-step {
+    min-height: 170px;
+  }
+
+  .contact-section {
+    padding-top: 92px;
+  }
+
+  .contact-links a {
+    min-height: 92px;
+  }
+
+  .video-shell.vertical {
+    width: min(82vw, 410px);
+    max-height: 82vh;
+  }
+}
+
+@media (max-width: 380px) {
+  .hero h1 { font-size: 76px; }
+  .hero-tagline p { font-size: 23px; }
+  .contact-links strong { font-size: 22px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-progress { display: none; }
+}
+
 </style>
 </head>
 <body>
+  <div class="scroll-progress" aria-hidden="true"></div>
   <div class="noise" aria-hidden="true"></div>
   <div class="cursor-glow" aria-hidden="true"></div>
 
@@ -1545,7 +1863,7 @@ footer {
           <h2 data-i18n="work.title">Portofoliu</h2>
         </div>
         <p class="section-note" data-i18n="work.note">
-          Videoclipurile reale vor fi adăugate aici. Structura este deja pregătită pentru YouTube.
+          Selecția video este în curs de actualizare. Proiectele finale vor apărea aici.
         </p>
       </div>
 
@@ -1718,7 +2036,7 @@ const translations = {
     "hero.scroll": "SCROLL",
 
     "work.title": "Portofoliu",
-    "work.note": "Videoclipurile reale vor fi adăugate aici. Structura este deja pregătită pentru YouTube.",
+    "work.note": "Selecția video este în curs de actualizare. Proiectele finale vor apărea aici.",
 
     "about.title": "Editare construită pentru ritm, imagine și energie.",
     "about.p1": "Sunt editor video cu peste un an de experiență, axat în principal pe montaje auto, videoclipuri de eveniment și conținut pentru social media.",
@@ -1750,7 +2068,7 @@ const translations = {
     "modal.placeholderTitle": "Video în curând",
     "modal.placeholderText": "Acest proiect este pregătit pentru un link YouTube.",
 
-    "project.placeholder": "În curând",
+    "project.placeholder": "În actualizare",
     "project.watch": "Deschide"
   },
   en: {
@@ -1766,7 +2084,7 @@ const translations = {
     "hero.scroll": "SCROLL",
 
     "work.title": "Selected Work",
-    "work.note": "The final videos will be added here. The site is already prepared for YouTube links.",
+    "work.note": "The selected work is currently being updated. Final projects will appear here.",
 
     "about.title": "Editing built around rhythm, image and energy.",
     "about.p1": "I'm a video editor with over a year of experience, focused mainly on automotive edits, event videos and social media content.",
@@ -1798,7 +2116,7 @@ const translations = {
     "modal.placeholderTitle": "Video coming soon",
     "modal.placeholderText": "This project slot is ready for a YouTube link.",
 
-    "project.placeholder": "Coming soon",
+    "project.placeholder": "Updating",
     "project.watch": "Open"
   }
 };
@@ -1858,6 +2176,7 @@ let currentLang = "ro";
 const projectGrid = document.getElementById("projectGrid");
 const modal = document.getElementById("videoModal");
 const videoEmbed = document.getElementById("videoEmbed");
+const videoShell = document.querySelector(".video-shell");
 const placeholderPanel = document.getElementById("placeholderPanel");
 const modalClose = document.querySelector(".modal-close");
 const menuToggle = document.querySelector(".menu-toggle");
@@ -1886,16 +2205,25 @@ function renderProjects() {
 
   projectGrid.innerHTML = projects.map((project, index) => {
     const number = String(index + 1).padStart(2, "0");
-    const hasVideo = Boolean(extractYouTubeId(project.youtube));
+    const videoId = extractYouTubeId(project.youtube);
+    const hasVideo = Boolean(videoId);
     const status = hasVideo
       ? translations[currentLang]["project.watch"]
       : translations[currentLang]["project.placeholder"];
+    const thumbStyle = hasVideo
+      ? `style="--thumb:url('https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg')"`
+      : "";
 
     return `
-      <article class="project-card reveal ${hasVideo ? "has-video" : ""}" data-project="${index}" tabindex="0" role="button" aria-label="${project.title[currentLang]}">
+      <article
+        class="project-card reveal ${hasVideo ? "has-video" : ""}"
+        data-project="${index}"
+        ${hasVideo ? 'tabindex="0" role="button"' : ""}
+        aria-label="${project.title[currentLang]}"
+        ${thumbStyle}>
         <div class="project-thumb" aria-hidden="true">
           <div class="project-no">${number}</div>
-          <div class="project-play">▶</div>
+          <div class="project-play">${hasVideo ? "▶" : "SOON"}</div>
         </div>
         <div class="project-info">
           <div>
@@ -1911,7 +2239,7 @@ function renderProjects() {
     `;
   }).join("");
 
-  projectGrid.querySelectorAll(".project-card").forEach(card => {
+  projectGrid.querySelectorAll(".project-card.has-video").forEach(card => {
     const open = () => openProject(Number(card.dataset.project));
     card.addEventListener("click", open);
     card.addEventListener("keydown", (event) => {
@@ -1930,6 +2258,7 @@ function openProject(index) {
   const id = extractYouTubeId(project.youtube);
 
   videoEmbed.innerHTML = "";
+  videoShell.classList.toggle("vertical", project.format === "9:16");
 
   if (id) {
     placeholderPanel.classList.add("hidden");
@@ -1955,6 +2284,7 @@ function closeModal() {
   modal.classList.remove("open");
   modal.setAttribute("aria-hidden", "true");
   videoEmbed.innerHTML = "";
+  videoShell.classList.remove("vertical");
   document.body.style.overflow = "";
 }
 
@@ -2050,6 +2380,45 @@ if (window.matchMedia("(pointer:fine)").matches) {
     glow.style.top = `${event.clientY}px`;
     glow.style.opacity = "1";
   });
+}
+
+
+const siteHeader = document.querySelector(".site-header");
+const scrollProgress = document.querySelector(".scroll-progress");
+
+function updateScrollUI() {
+  const scrollTop = window.scrollY || document.documentElement.scrollTop;
+  const scrollMax = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+  const progress = Math.min(1, Math.max(0, scrollTop / scrollMax));
+
+  if (scrollProgress) scrollProgress.style.transform = `scaleX(${progress})`;
+  if (siteHeader) siteHeader.classList.toggle("scrolled", scrollTop > 18);
+}
+
+window.addEventListener("scroll", updateScrollUI, { passive: true });
+window.addEventListener("resize", updateScrollUI, { passive: true });
+updateScrollUI();
+
+const navTargets = [...document.querySelectorAll("main section[id]")];
+const desktopLinks = [...document.querySelectorAll(".desktop-nav a")];
+
+if ("IntersectionObserver" in window) {
+  const sectionSpy = new IntersectionObserver((entries) => {
+    const visible = entries
+      .filter(entry => entry.isIntersecting)
+      .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+    if (!visible) return;
+
+    desktopLinks.forEach(link => {
+      link.classList.toggle("active", link.getAttribute("href") === `#${visible.target.id}`);
+    });
+  }, {
+    rootMargin: "-25% 0px -58% 0px",
+    threshold: [0.08, 0.2, 0.4]
+  });
+
+  navTargets.forEach(section => sectionSpy.observe(section));
 }
 
 document.getElementById("year").textContent = new Date().getFullYear();
