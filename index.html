@@ -1749,6 +1749,464 @@ footer {
   .scroll-progress { display: none; }
 }
 
+
+/* ===== JKT MOTION — V3 BOLD VISUAL PASS ===== */
+
+body {
+  background:
+    radial-gradient(circle at 82% 7%, rgba(228,79,40,.13), transparent 26%),
+    radial-gradient(circle at 8% 50%, rgba(184,32,31,.08), transparent 23%),
+    linear-gradient(180deg, #090909 0%, #0b0807 52%, #090909 100%);
+}
+
+.hero {
+  isolation: isolate;
+}
+
+.hero::before {
+  width: 72vw;
+  height: 72vw;
+  right: -35vw;
+  top: 1vh;
+  border: 2px solid rgba(228,79,40,.14);
+  box-shadow:
+    0 0 0 28px rgba(228,79,40,.018),
+    0 0 0 70px rgba(228,79,40,.012);
+}
+
+.hero::after {
+  left: auto;
+  right: -8vw;
+  bottom: 2vh;
+  width: 47vw;
+  height: 17vw;
+  border: 0;
+  background: var(--accent);
+  clip-path: polygon(6% 18%, 91% 0, 100% 72%, 16% 100%);
+  transform: rotate(-9deg);
+  opacity: .055;
+}
+
+.availability-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: fit-content;
+  max-width: 100%;
+  margin: -2px 0 22px;
+  padding: 7px 10px 7px 8px;
+  border: 1px solid rgba(228,79,40,.33);
+  background: rgba(228,79,40,.035);
+  color: #c2bbb2;
+  font-family: var(--display);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  white-space: nowrap;
+  transform: rotate(-.45deg);
+}
+
+.availability-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px rgba(228,79,40,.12), 0 0 14px rgba(228,79,40,.55);
+  animation: availabilityPulse 1.7s ease-in-out infinite;
+}
+
+.availability-line {
+  width: 27px;
+  height: 1px;
+  background: #4b4540;
+}
+
+@keyframes availabilityPulse {
+  0%, 100% { transform: scale(.88); opacity: .8; }
+  50% { transform: scale(1.12); opacity: 1; }
+}
+
+.hero-copy {
+  position: relative;
+  z-index: 5;
+}
+
+.hero h1 {
+  filter: drop-shadow(0 18px 35px rgba(0,0,0,.28));
+}
+
+.hero h1 > span:first-child {
+  position: relative;
+  z-index: 2;
+}
+
+.hero h1 > span:first-child::after {
+  content: "";
+  position: absolute;
+  left: -.03em;
+  right: .18em;
+  bottom: -.05em;
+  height: .065em;
+  background: var(--accent);
+  transform: rotate(-2.5deg);
+  z-index: -1;
+  opacity: .92;
+}
+
+.hero h1 .accent-outline {
+  -webkit-text-stroke: 2.4px var(--accent);
+  text-shadow:
+    6px 6px 0 rgba(184,32,31,.16),
+    -1px 1px 0 rgba(255,106,42,.18);
+}
+
+.hero-art::before {
+  content: "";
+  position: absolute;
+  width: 78%;
+  aspect-ratio: 1.13;
+  background: linear-gradient(135deg, var(--accent-warm), var(--accent-deep));
+  clip-path: polygon(11% 4%, 89% 14%, 100% 69%, 77% 96%, 9% 86%, 0 30%);
+  transform: rotate(10deg);
+  opacity: .13;
+  filter: blur(.2px);
+}
+
+.hero-art::after {
+  content: "JKT";
+  position: absolute;
+  right: 0;
+  bottom: 5%;
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: clamp(110px, 15vw, 220px);
+  line-height: .7;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(240,233,223,.07);
+  transform: rotate(-14deg);
+  pointer-events: none;
+}
+
+.hero-badge {
+  width: clamp(215px, 24vw, 295px);
+  background:
+    linear-gradient(152deg, var(--accent-warm) 0%, var(--accent) 42%, var(--accent-deep) 100%);
+  box-shadow:
+    13px 14px 0 rgba(228,79,40,.08),
+    -8px -7px 0 rgba(240,233,223,.035),
+    0 0 100px rgba(228,79,40,.2);
+}
+
+.hero-badge::before {
+  content: "";
+  position: absolute;
+  inset: -10px 12px 13px -12px;
+  border: 1px solid rgba(240,233,223,.18);
+  clip-path: inherit;
+  z-index: -1;
+}
+
+.manifesto-strip {
+  position: relative;
+  z-index: 4;
+  margin-top: -1px;
+  padding: 0 clamp(22px, 6vw, 100px);
+  background: #0c0a09;
+  border-block: 1px solid rgba(228,79,40,.22);
+  overflow: hidden;
+}
+
+.manifesto-strip::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    125deg,
+    transparent 0 29px,
+    rgba(228,79,40,.045) 29px 31px
+  );
+  pointer-events: none;
+}
+
+.manifesto-inner {
+  min-height: 118px;
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 28px;
+}
+
+.manifesto-small {
+  color: var(--accent);
+  font-family: var(--display);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .17em;
+  white-space: nowrap;
+}
+
+.manifesto-inner strong {
+  font-family: var(--display);
+  font-size: clamp(35px, 5vw, 74px);
+  line-height: .82;
+  text-transform: uppercase;
+  letter-spacing: -.025em;
+}
+
+.manifesto-mark {
+  color: var(--accent);
+  font-family: var(--display);
+  font-size: 50px;
+  font-weight: 900;
+  transform: rotate(-9deg);
+}
+
+.ticker {
+  box-shadow: 0 12px 50px rgba(228,79,40,.08);
+}
+
+.work-section {
+  background:
+    linear-gradient(160deg, rgba(228,79,40,.04), transparent 36%),
+    #090909;
+}
+
+.work-section::before {
+  content: "01";
+  position: absolute;
+  right: clamp(20px, 5vw, 80px);
+  top: 70px;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(228,79,40,.09);
+  font-family: var(--display);
+  font-size: clamp(140px, 22vw, 330px);
+  font-weight: 900;
+  line-height: 1;
+  transform: rotate(4deg);
+  pointer-events: none;
+}
+
+.section-head h2 {
+  position: relative;
+  width: fit-content;
+}
+
+.section-head h2::after {
+  content: "";
+  position: absolute;
+  left: -2%;
+  bottom: -.15em;
+  width: 46%;
+  height: 5px;
+  background: var(--accent);
+  transform: rotate(-2deg);
+}
+
+.about-section {
+  background:
+    linear-gradient(120deg, rgba(228,79,40,.055), transparent 30%),
+    linear-gradient(to right, transparent, rgba(228,79,40,.025)),
+    #0c0c0c;
+}
+
+.about-callout {
+  margin-top: 38px;
+  max-width: 680px;
+  display: grid;
+  grid-template-columns: 95px 1fr;
+  align-items: center;
+  border: 1px solid rgba(228,79,40,.32);
+  background: rgba(228,79,40,.04);
+  transform: rotate(-.6deg);
+}
+
+.about-callout span {
+  align-self: stretch;
+  display: grid;
+  place-items: center;
+  background: var(--accent);
+  color: #090909;
+  font-family: var(--display);
+  font-weight: 900;
+  letter-spacing: .12em;
+  font-size: 11px;
+}
+
+.about-callout strong {
+  padding: 18px 20px;
+  font-family: var(--display);
+  font-size: clamp(21px, 2.6vw, 33px);
+  line-height: 1;
+  letter-spacing: .04em;
+}
+
+.service-card {
+  background: #0b0b0b;
+}
+
+.service-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 4px;
+  height: 0;
+  background: var(--accent);
+  transition: height .28s ease;
+}
+
+.service-card:hover::before {
+  height: 100%;
+}
+
+.service-card:nth-child(2),
+.service-card:nth-child(5) {
+  background:
+    linear-gradient(145deg, rgba(228,79,40,.09), transparent 62%),
+    #0b0b0b;
+}
+
+.service-card:nth-child(3n) h3 {
+  color: var(--accent);
+}
+
+.process-section {
+  background:
+    radial-gradient(circle at 85% 10%, rgba(9,9,9,.12), transparent 25%),
+    linear-gradient(125deg, var(--accent-warm), var(--accent) 47%, #ce3527);
+}
+
+.contact-section::before {
+  content: "";
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  right: -160px;
+  top: 10%;
+  border: 1px dashed rgba(228,79,40,.3);
+  border-radius: 48% 52% 45% 55%;
+  transform: rotate(22deg);
+}
+
+.contact-inner h2 .accent-outline {
+  -webkit-text-stroke: 2px var(--accent);
+}
+
+.contact-links a:hover {
+  background:
+    linear-gradient(90deg, rgba(228,79,40,.08), transparent 55%);
+}
+
+footer {
+  border-top: 1px solid rgba(228,79,40,.1);
+}
+
+@media (max-width: 700px) {
+  .availability-row {
+    width: 100%;
+    justify-content: flex-start;
+    margin-bottom: 18px;
+    font-size: 9px;
+    overflow: hidden;
+  }
+
+  .availability-line {
+    width: 15px;
+    flex: 0 0 auto;
+  }
+
+  .hero {
+    padding-top: 96px;
+  }
+
+  .hero h1 > span:first-child::after {
+    height: .055em;
+  }
+
+  .hero-art {
+    min-height: 315px;
+    margin-top: -8px;
+  }
+
+  .hero-art::before {
+    width: 77%;
+    opacity: .17;
+  }
+
+  .hero-art::after {
+    font-size: 115px;
+    right: -4%;
+    bottom: 6%;
+  }
+
+  .hero-badge {
+    width: 174px;
+  }
+
+  .manifesto-strip {
+    padding-inline: 20px;
+  }
+
+  .manifesto-inner {
+    min-height: 94px;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+  }
+
+  .manifesto-small {
+    display: none;
+  }
+
+  .manifesto-inner strong {
+    font-size: clamp(32px, 10vw, 48px);
+    line-height: .84;
+  }
+
+  .manifesto-mark {
+    font-size: 37px;
+  }
+
+  .work-section::before {
+    top: 50px;
+    right: 8px;
+    font-size: 170px;
+  }
+
+  .section-head h2::after {
+    height: 4px;
+    width: 58%;
+  }
+
+  .about-callout {
+    margin-top: 28px;
+    grid-template-columns: 72px 1fr;
+  }
+
+  .about-callout strong {
+    padding: 15px;
+    font-size: 21px;
+  }
+
+  .about-callout span {
+    font-size: 9px;
+  }
+
+  .service-card:nth-child(odd) {
+    transform: translateX(-2px);
+  }
+
+  .service-card:nth-child(even) {
+    transform: translateX(2px);
+  }
+
+  .contact-section::before {
+    width: 260px;
+    height: 260px;
+    right: -130px;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -1800,6 +2258,13 @@ footer {
 
       <div class="hero-copy reveal">
         <p class="eyebrow" data-i18n="hero.eyebrow">VIDEO EDITING · COLOR · SOUND</p>
+
+        <div class="availability-row">
+          <span class="availability-dot"></span>
+          <span data-i18n="hero.available">DISPONIBIL PENTRU PROIECTE</span>
+          <span class="availability-line"></span>
+          <span>DAVINCI RESOLVE STUDIO</span>
+        </div>
         <h1>
           <span>JKT</span>
           <span class="accent-outline">MOTION</span>
@@ -1836,6 +2301,15 @@ footer {
       <div class="scroll-mark" aria-hidden="true">
         <span data-i18n="hero.scroll">SCROLL</span>
         <div></div>
+      </div>
+    </section>
+
+
+    <section class="manifesto-strip" aria-label="JKT Motion identity">
+      <div class="manifesto-inner">
+        <span class="manifesto-small">JKT MOTION / 001</span>
+        <strong data-i18n="manifesto.main">CLEAN CUTS. DIRTY ENERGY.</strong>
+        <span class="manifesto-mark" aria-hidden="true">///</span>
       </div>
     </section>
 
@@ -1879,6 +2353,12 @@ footer {
       <div class="about-copy reveal">
         <p class="section-kicker">02 — ABOUT</p>
         <h2 data-i18n="about.title">Editare construită pentru ritm, imagine și energie.</h2>
+
+        <div class="about-callout reveal">
+          <span>FOCUS</span>
+          <strong>AUTOMOTIVE / EVENTS / SOCIAL</strong>
+        </div>
+
         <div class="about-text">
           <p data-i18n="about.p1">
             Sunt editor video cu peste un an de experiență, axat în principal pe montaje auto, videoclipuri de eveniment și conținut pentru social media.
@@ -2034,6 +2514,10 @@ const translations = {
     "hero.ctaWork": "Vezi portofoliul",
     "hero.ctaContact": "Hai să lucrăm împreună",
     "hero.scroll": "SCROLL",
+    "hero.available": "AVAILABLE FOR PROJECTS",
+    "manifesto.main": "CLEAN CUTS. DIRTY ENERGY.",
+    "hero.available": "DISPONIBIL PENTRU PROIECTE",
+    "manifesto.main": "TĂIETURI CURATE. ENERGIE BRUTĂ.",
 
     "work.title": "Portofoliu",
     "work.note": "Selecția video este în curs de actualizare. Proiectele finale vor apărea aici.",
@@ -2082,6 +2566,8 @@ const translations = {
     "hero.ctaWork": "View work",
     "hero.ctaContact": "Let's work together",
     "hero.scroll": "SCROLL",
+    "hero.available": "AVAILABLE FOR PROJECTS",
+    "manifesto.main": "CLEAN CUTS. DIRTY ENERGY.",
 
     "work.title": "Selected Work",
     "work.note": "The selected work is currently being updated. Final projects will appear here.",
