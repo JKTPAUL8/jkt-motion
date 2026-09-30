@@ -3202,6 +3202,258 @@ footer {
   }
 }
 
+
+/* ===== JKT MOTION — V10 HERO BADGE UPGRADE ===== */
+
+/* Bigger overall badge/panel and more structured layout. */
+.hero-brand-panel {
+  width: min(540px, 96%);
+  min-height: 320px;
+  padding: 26px 28px 28px;
+  gap: 20px;
+  transform: rotate(-4deg);
+  background:
+    linear-gradient(135deg, rgba(10,10,10,.92), rgba(24,12,10,.82)),
+    rgba(8,8,8,.88);
+  border: 1px solid rgba(228,79,40,.28);
+  box-shadow:
+    0 32px 90px rgba(0,0,0,.34),
+    0 0 0 1px rgba(228,79,40,.08) inset;
+}
+
+.hero-brand-panel::before {
+  background:
+    linear-gradient(127deg, transparent 0 58%, rgba(228,79,40,.09) 58% 60%, transparent 60%),
+    linear-gradient(165deg, rgba(228,79,40,.10), transparent 40%),
+    radial-gradient(circle at 16% 20%, rgba(255,255,255,.05), transparent 23%);
+}
+
+.hero-brand-panel::after {
+  right: -10px;
+  top: 12px;
+  width: 175px;
+  height: 175px;
+  border-color: rgba(228,79,40,.10);
+}
+
+.hero-brand-top {
+  padding-bottom: 2px;
+  border-bottom: 0;
+}
+
+.hero-brand-eyebrow {
+  font-size: 14px;
+  letter-spacing: .16em;
+  color: var(--ink);
+  opacity: .95;
+}
+
+.hero-brand-status,
+.hero-brand-resolve {
+  position: relative;
+  overflow: hidden;
+  border: 2px solid rgba(240,233,223,.16);
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.015), rgba(255,255,255,0)),
+    rgba(9,9,9,.46);
+  box-shadow:
+    0 0 0 1px rgba(0,0,0,.18) inset,
+    0 14px 30px rgba(0,0,0,.18);
+}
+
+.hero-brand-status {
+  min-height: 104px;
+  padding: 18px 20px 18px 22px;
+}
+
+.hero-brand-status::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(228,79,40,.09), transparent 45%),
+    linear-gradient(120deg, transparent 0 76%, rgba(228,79,40,.07) 76% 78%, transparent 78%);
+  pointer-events: none;
+}
+
+.hero-brand-status::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 5px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--accent-warm), var(--accent), var(--accent-deep));
+  box-shadow: 0 0 18px rgba(228,79,40,.45);
+  animation: statusPulse 2s ease-in-out infinite;
+}
+
+@keyframes statusPulse {
+  0%, 100% { opacity: .75; transform: scaleY(.96); }
+  50% { opacity: 1; transform: scaleY(1); }
+}
+
+.hero-brand-status .status-label,
+.hero-brand-resolve .status-label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 12px;
+  letter-spacing: .14em;
+  color: #cfc6bc;
+  opacity: .82;
+}
+
+.hero-brand-status strong {
+  margin-top: 0;
+  font-family: var(--display);
+  font-size: clamp(34px, 3.1vw, 50px);
+  line-height: .92;
+  letter-spacing: -.015em;
+  color: var(--ink);
+  text-shadow: 0 4px 16px rgba(0,0,0,.22);
+}
+
+.hero-brand-resolve {
+  min-height: 118px;
+  grid-template-columns: 82px 1fr;
+  gap: 18px;
+  align-items: center;
+  padding: 18px 20px 18px 18px;
+}
+
+.hero-brand-resolve::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.02), transparent 40%),
+    linear-gradient(120deg, transparent 0 74%, rgba(228,79,40,.06) 74% 76%, transparent 76%);
+  pointer-events: none;
+}
+
+.resolve-logo-original {
+  width: 82px;
+  height: 82px;
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,.32));
+}
+
+.hero-brand-resolve-copy {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-brand-resolve strong {
+  margin-top: 0;
+  font-family: var(--display);
+  font-size: clamp(31px, 2.75vw, 45px);
+  line-height: .93;
+  letter-spacing: -.015em;
+  color: var(--ink);
+}
+
+/* Make the hero art slightly bigger to support the upgraded panel. */
+.hero-art {
+  min-height: 470px;
+}
+
+.blast-ring.ring-one { width: 98%; }
+.blast-ring.ring-two { width: 75%; }
+.blast-ring.ring-three { width: 53%; }
+
+@media (max-width: 980px) {
+  .hero-brand-panel {
+    width: min(500px, 98%);
+    min-height: 290px;
+    padding: 24px;
+  }
+
+  .hero-brand-status strong {
+    font-size: clamp(30px, 4vw, 42px);
+  }
+
+  .hero-brand-resolve {
+    grid-template-columns: 72px 1fr;
+  }
+
+  .resolve-logo-original {
+    width: 72px;
+    height: 72px;
+  }
+
+  .hero-brand-resolve strong {
+    font-size: clamp(28px, 3.2vw, 38px);
+  }
+}
+
+@media (max-width: 700px) {
+  .hero-art {
+    min-height: 388px;
+  }
+
+  .hero-brand-panel {
+    width: min(380px, 96%);
+    min-height: 0;
+    padding: 18px;
+    gap: 14px;
+    transform: rotate(-3deg);
+  }
+
+  .hero-brand-eyebrow {
+    font-size: 11px;
+    letter-spacing: .14em;
+  }
+
+  .hero-brand-status {
+    min-height: 86px;
+    padding: 14px 14px 14px 18px;
+  }
+
+  .hero-brand-status .status-label,
+  .hero-brand-resolve .status-label {
+    font-size: 10px;
+    margin-bottom: 4px;
+  }
+
+  .hero-brand-status strong {
+    font-size: 24px;
+    line-height: .95;
+  }
+
+  .hero-brand-resolve {
+    min-height: 96px;
+    grid-template-columns: 58px 1fr;
+    gap: 12px;
+    padding: 14px;
+  }
+
+  .resolve-logo-original {
+    width: 58px;
+    height: 58px;
+  }
+
+  .hero-brand-resolve strong {
+    font-size: 22px;
+    line-height: .95;
+  }
+}
+
+@media (max-width: 420px) {
+  .hero-brand-panel {
+    width: 98%;
+    padding: 16px;
+  }
+
+  .hero-brand-status strong {
+    font-size: 21px;
+  }
+
+  .hero-brand-resolve strong {
+    font-size: 19px;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -3512,7 +3764,7 @@ const translations = {
     "nav.services": "Servicii",
     "nav.contact": "Contact",
 
-    "hero.eyebrow": "VIDEO EDITING · COLOR · SOUND",
+    "hero.eyebrow": "EDITARE 4K · COLOR · SOUND",
     "hero.tagline": "Haos controlat. Montaj cu impact.",
     "hero.taglineLine1": "Haos controlat.",
     "hero.taglineLine2": "Montaj cu impact.",
@@ -3571,7 +3823,7 @@ const translations = {
     "nav.services": "Services",
     "nav.contact": "Contact",
 
-    "hero.eyebrow": "VIDEO EDITING · COLOR · SOUND",
+    "hero.eyebrow": "4K EDITS · COLOR · SOUND",
     "hero.tagline": "Controlled chaos. Editing with impact.",
     "hero.taglineLine1": "Controlled chaos.",
     "hero.taglineLine2": "Editing with impact.",
