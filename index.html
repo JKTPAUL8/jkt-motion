@@ -3716,6 +3716,81 @@ footer {
   }
 }
 
+
+/* ===== JKT MOTION — V13 PROCESS TRACKS SCALE / ANGLE TWEAK ===== */
+.process-line::before,
+.process-line::after {
+  transform: rotate(-45deg) !important;
+}
+
+.process-line::before {
+  width: min(3200px, 210vw) !important;
+  height: min(3200px, 210vw) !important;
+  left: 34% !important;
+  top: -88% !important;
+  opacity: .16 !important;
+}
+
+.process-line::after {
+  width: min(2500px, 170vw) !important;
+  height: min(2500px, 170vw) !important;
+  left: 47% !important;
+  top: -56% !important;
+  opacity: .09 !important;
+}
+
+@media (max-width: 1400px) {
+  .process-line::before {
+    width: 2200px !important;
+    height: 2200px !important;
+    left: 34% !important;
+    top: -74% !important;
+  }
+
+  .process-line::after {
+    width: 1700px !important;
+    height: 1700px !important;
+    left: 48% !important;
+    top: -48% !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .process-line::before {
+    width: 1350px !important;
+    height: 1350px !important;
+    left: 28% !important;
+    top: -44% !important;
+    opacity: .15 !important;
+  }
+
+  .process-line::after {
+    width: 980px !important;
+    height: 980px !important;
+    left: 42% !important;
+    top: -22% !important;
+    opacity: .08 !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .process-line::before {
+    width: 980px !important;
+    height: 980px !important;
+    left: 14% !important;
+    top: -18% !important;
+    opacity: .14 !important;
+  }
+
+  .process-line::after {
+    width: 760px !important;
+    height: 760px !important;
+    left: 28% !important;
+    top: 0% !important;
+    opacity: .07 !important;
+  }
+}
+
 </style>
 </head>
 <body>
