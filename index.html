@@ -2466,6 +2466,197 @@ footer {
   }
 }
 
+
+/* ===== JKT MOTION — V6 HERO + SERVICES POLISH ===== */
+.service-card h3,
+.service-card:nth-child(3n) h3 {
+  color: var(--accent) !important;
+}
+
+.hero-tagline {
+  align-items: flex-start;
+}
+
+.hero-tagline-copy {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  max-width: 720px;
+  color: #d8d2c9;
+  font-family: var(--display);
+  font-size: clamp(28px, 3vw, 44px);
+  font-weight: 600;
+  line-height: .98;
+}
+
+.hero-tagline-copy > span {
+  display: block;
+  white-space: nowrap;
+}
+
+.hero-status-panel {
+  width: min(760px, 100%);
+  margin: 2px 0 28px;
+  display: grid;
+  grid-template-columns: 1fr 1.18fr;
+  gap: 10px;
+  position: relative;
+  z-index: 5;
+}
+
+.status-card {
+  min-height: 78px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 14px 17px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(228,79,40,.42);
+  background:
+    linear-gradient(135deg, rgba(228,79,40,.09), rgba(228,79,40,.015) 48%, rgba(0,0,0,.18)),
+    rgba(10,10,10,.64);
+  backdrop-filter: blur(8px);
+  box-shadow: 7px 8px 0 rgba(184,32,31,.07);
+}
+
+.status-card::after {
+  content: "";
+  position: absolute;
+  right: -18px;
+  bottom: -28px;
+  width: 82px;
+  height: 82px;
+  border: 1px solid rgba(228,79,40,.14);
+  transform: rotate(35deg);
+}
+
+.status-card-live {
+  border-left: 4px solid var(--accent);
+}
+
+.status-card-live .availability-dot {
+  width: 12px;
+  height: 12px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 6px rgba(228,79,40,.12), 0 0 22px rgba(228,79,40,.65);
+}
+
+.status-label {
+  display: block;
+  margin-bottom: 5px;
+  color: #8f8880;
+  font-family: var(--display);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+
+.status-card strong {
+  display: block;
+  color: var(--ink);
+  font-family: var(--display);
+  font-size: clamp(17px, 1.65vw, 24px);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: .055em;
+  text-transform: uppercase;
+}
+
+.status-card-live strong {
+  color: var(--accent);
+}
+
+.resolve-mark {
+  width: 50px;
+  height: 50px;
+  flex: 0 0 auto;
+  position: relative;
+  display: block;
+  border: 1px solid rgba(240,233,223,.14);
+  border-radius: 50%;
+  transform: rotate(-5deg);
+}
+
+.resolve-mark::after {
+  content: "";
+  position: absolute;
+  inset: 15px;
+  border-radius: 50%;
+  background: #0a0a0a;
+  border: 1px solid rgba(240,233,223,.12);
+  z-index: 3;
+}
+
+.resolve-lobe {
+  position: absolute;
+  width: 22px;
+  height: 11px;
+  left: 13px;
+  top: 7px;
+  border-radius: 12px 12px 3px 12px;
+  background: var(--accent);
+  transform-origin: 11px 18px;
+  opacity: .95;
+}
+
+.lobe-b { transform: rotate(120deg); background: var(--accent-warm); }
+.lobe-c { transform: rotate(240deg); background: var(--accent-deep); }
+
+@media (max-width: 700px) {
+  .hero-status-panel {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+
+  .status-card {
+    min-height: 66px;
+    padding: 11px 13px;
+  }
+
+  .status-card-resolve {
+    width: 92%;
+    margin-left: auto;
+  }
+
+  .status-card strong { font-size: 17px; }
+  .status-label { font-size: 9px; }
+
+  .resolve-mark {
+    width: 43px;
+    height: 43px;
+  }
+
+  .resolve-lobe {
+    width: 19px;
+    height: 9px;
+    left: 11px;
+    top: 6px;
+    transform-origin: 9.5px 15.5px;
+  }
+
+  .resolve-mark::after { inset: 13px; }
+
+  .hero-tagline-copy {
+    font-size: 27px;
+    line-height: .96;
+  }
+
+  .hero-tagline-copy > span {
+    white-space: normal;
+  }
+}
+
+@media (max-width: 380px) {
+  .hero-tagline-copy { font-size: 24px; }
+  .status-card-resolve { width: 100%; }
+}
+
 </style>
 </head>
 <body>
@@ -2517,20 +2708,37 @@ footer {
 
       <div class="hero-copy reveal">
         <p class="eyebrow" data-i18n="hero.eyebrow">VIDEO EDITING · COLOR · SOUND</p>
+        <div class="hero-status-panel">
+          <div class="status-card status-card-live">
+            <span class="availability-dot" aria-hidden="true"></span>
+            <div>
+              <span class="status-label" data-i18n="hero.statusLabel">STATUS</span>
+              <strong data-i18n="hero.available">DISPONIBIL PENTRU PROIECTE</strong>
+            </div>
+          </div>
 
-        <div class="availability-row">
-          <span class="availability-dot"></span>
-          <span data-i18n="hero.available">DISPONIBIL PENTRU PROIECTE</span>
-          <span class="availability-line"></span>
-          <span>DAVINCI RESOLVE STUDIO</span>
+          <div class="status-card status-card-resolve">
+            <span class="resolve-mark" aria-hidden="true">
+              <span class="resolve-lobe lobe-a"></span>
+              <span class="resolve-lobe lobe-b"></span>
+              <span class="resolve-lobe lobe-c"></span>
+            </span>
+            <div>
+              <span class="status-label" data-i18n="hero.editingIn">EDITARE ÎN</span>
+              <strong>DaVinci Resolve Studio</strong>
+            </div>
+          </div>
         </div>
-        <h1>
+<h1>
           <span>JKT</span>
           <span class="accent-outline">MOTION</span>
         </h1>
         <div class="hero-tagline">
           <span class="slash">/</span>
-          <p data-i18n="hero.tagline">Haos controlat. Montaj cu impact.</p>
+          <p class="hero-tagline-copy">
+            <span data-i18n="hero.taglineLine1">Haos controlat.</span>
+            <span data-i18n="hero.taglineLine2">Montaj cu impact.</span>
+          </p>
         </div>
         <div class="hero-cta">
           <a class="btn btn-primary" href="#work">
@@ -2770,12 +2978,16 @@ const translations = {
 
     "hero.eyebrow": "VIDEO EDITING · COLOR · SOUND",
     "hero.tagline": "Haos controlat. Montaj cu impact.",
+    "hero.taglineLine1": "Haos controlat.",
+    "hero.taglineLine2": "Montaj cu impact.",
     "hero.ctaWork": "Vezi portofoliul",
     "hero.ctaContact": "Hai să lucrăm împreună",
     "hero.scroll": "SCROLL",
     "hero.available": "AVAILABLE FOR PROJECTS",
     "manifesto.main": "CLEAN CUTS. DIRTY ENERGY.",
     "hero.available": "DISPONIBIL PENTRU PROIECTE",
+    "hero.statusLabel": "STATUS",
+    "hero.editingIn": "EDITARE ÎN",
     "manifesto.main": "TĂIETURI CURATE. ENERGIE BRUTĂ.",
 
     "work.title": "Portofoliu",
@@ -2787,12 +2999,12 @@ const translations = {
     "about.p3": "Lucrez în prezent în DaVinci Resolve Studio, după trecerea de la Adobe Premiere Pro.",
 
     "services.title": "Servicii",
-    "services.edit": "Editare video până la 4K, short-form și long-form, vertical și orizontal.",
-    "services.color": "Color correction și color grading, inclusiv material filmat în LOG.",
-    "services.sound": "Sound design, efecte audio și finisarea mixului pentru mai mult impact.",
-    "services.text": "Subtitrări simple sau animate, cu efecte adaptate stilului proiectului.",
-    "services.content": "Automotive, evenimente, promovare, vloguri și social media.",
-    "services.revision": "Revizii și comunicare pe tot parcursul proiectului.",
+    "services.edit": "Editez de la clipuri scurte pentru social media până la materiale mai lungi, în format vertical sau orizontal, până la 4K.",
+    "services.color": "Corectez și finisez culorile pentru un look mai curat și mai coerent, inclusiv pentru material filmat în LOG.",
+    "services.sound": "Construiesc partea audio astfel încât ritmul, tranzițiile și momentele importante să se simtă mai puternic.",
+    "services.text": "Pot adăuga subtitrări simple sau animate, adaptate ritmului și stilului fiecărui videoclip.",
+    "services.content": "Lucrez în special cu automotive, evenimente, materiale promo, vloguri și conținut pentru social media.",
+    "services.revision": "Ținem legătura pe parcursul proiectului și ajustăm montajul până când rezultatul este în direcția potrivită.",
 
     "process.title": "De la material brut la un video care lovește.",
     "process.step1Title": "Brief",
@@ -2825,10 +3037,14 @@ const translations = {
 
     "hero.eyebrow": "VIDEO EDITING · COLOR · SOUND",
     "hero.tagline": "Controlled chaos. Editing with impact.",
+    "hero.taglineLine1": "Controlled chaos.",
+    "hero.taglineLine2": "Editing with impact.",
     "hero.ctaWork": "View work",
     "hero.ctaContact": "Let's work together",
     "hero.scroll": "SCROLL",
     "hero.available": "AVAILABLE FOR PROJECTS",
+    "hero.statusLabel": "STATUS",
+    "hero.editingIn": "EDITING IN",
     "manifesto.main": "CLEAN CUTS. DIRTY ENERGY.",
 
     "work.title": "Selected Work",
@@ -2840,12 +3056,12 @@ const translations = {
     "about.p3": "I currently work in DaVinci Resolve Studio, after moving from Adobe Premiere Pro.",
 
     "services.title": "Services",
-    "services.edit": "Video editing up to 4K, short-form and long-form, vertical and horizontal.",
-    "services.color": "Color correction and color grading, including LOG footage.",
-    "services.sound": "Sound design, audio effects and final mix polish for stronger impact.",
-    "services.text": "Simple or animated subtitles, with effects adapted to the project's style.",
-    "services.content": "Automotive, events, promo videos, vlogs and social media content.",
-    "services.revision": "Revisions and communication throughout the entire project.",
+    "services.edit": "I edit everything from short social clips to longer videos, in both vertical and horizontal formats, up to 4K.",
+    "services.color": "I correct and refine color for a cleaner, more consistent look, including footage shot in LOG.",
+    "services.sound": "I shape the audio so the pacing, transitions and key moments feel stronger and more intentional.",
+    "services.text": "I can add clean or animated subtitles that match the pace and style of each video.",
+    "services.content": "I mainly work on automotive, events, promo content, vlogs and social media videos.",
+    "services.revision": "We stay in touch throughout the project and refine the edit until it feels right.",
 
     "process.title": "From raw footage to a video that hits.",
     "process.step1Title": "Brief",
