@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="JKT Motion — video editing, color grading, sound design și content pentru automotive, evenimente și social media." />
+  <meta name="description" content="JKT Motion — editare video, culoare și design audio pentru proiecte auto, evenimente și conținut pentru rețele sociale." />
   <meta name="theme-color" content="#0a0a0a" />
-  <meta property="og:title" content="JKT Motion — Video Editor" />
-  <meta property="og:description" content="Video editing, color grading și sound design pentru automotive, evenimente, promo și social media." />
+  <meta property="og:title" content="JKT Motion — Editor video" />
+  <meta property="og:description" content="Editare video, culoare și design audio pentru proiecte auto, evenimente și conținut promoțional." />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary" />
   <meta name="color-scheme" content="dark" />
-  <title>JKT Motion — Video Editor</title>
+  <title>JKT Motion — Editor video</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%23090909'/%3E%3Cpath d='M9 45 19 17h9l-5 14 12-14h11L33 31l12 14H34l-9-10-4 10Z' fill='%23e44f28'/%3E%3C/svg%3E" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -3964,6 +3964,37 @@ footer {
   }
 }
 
+
+/* ===== JKT MOTION — V15 LANGUAGE + NAV POLISH ===== */
+.desktop-nav {
+  gap: 25px;
+  margin-right: 34px;
+}
+
+@media (max-width: 900px) {
+  .mobile-menu {
+    gap: 6px;
+  }
+
+  .mobile-menu a {
+    font-size: clamp(44px, 10.5vw, 76px);
+    padding: 8px 0;
+  }
+}
+
+@media (max-width: 700px), (max-height: 780px) {
+  .mobile-menu {
+    padding-top: 88px;
+    padding-bottom: 24px;
+    gap: 3px;
+  }
+
+  .mobile-menu a {
+    font-size: clamp(38px, 10vw, 64px);
+    padding: 7px 0;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -3981,6 +4012,7 @@ footer {
       <a href="#work" data-i18n="nav.work">Portofoliu</a>
       <a href="#about" data-i18n="nav.about">Despre</a>
       <a href="#services" data-i18n="nav.services">Servicii</a>
+      <a href="#process" data-i18n="nav.process">Proces</a>
       <a href="#contact" data-i18n="nav.contact">Contact</a>
     </nav>
 
@@ -4001,6 +4033,7 @@ footer {
     <a href="#work" data-i18n="nav.work">Portofoliu</a>
     <a href="#about" data-i18n="nav.about">Despre</a>
     <a href="#services" data-i18n="nav.services">Servicii</a>
+    <a href="#process" data-i18n="nav.process">Proces</a>
     <a href="#contact" data-i18n="nav.contact">Contact</a>
   </div>
 
@@ -4021,8 +4054,8 @@ footer {
         <div class="hero-tagline">
           <span class="slash">/</span>
           <p class="hero-tagline-copy">
-            <span data-i18n="hero.taglineLine1">Haos controlat.</span>
-            <span data-i18n="hero.taglineLine2">Montaj cu impact.</span>
+            <span data-i18n="hero.taglineLine1">Haos controlat</span>
+            <span data-i18n="hero.taglineLine2">Montaj cu impact</span>
           </p>
         </div>
         <div class="hero-cta">
@@ -4040,7 +4073,7 @@ footer {
         <div class="blast-ring ring-three"></div>
         <div class="hero-brand-panel">
           <div class="hero-brand-top">
-            <p class="hero-brand-eyebrow" data-i18n="hero.eyebrow">VIDEO EDITING · COLOR · SOUND</p>
+            <p class="hero-brand-eyebrow" data-i18n="hero.eyebrow">EDITARE 4K · CULOARE · SUNET</p>
           </div>
 
           <div class="hero-brand-status">
@@ -4064,7 +4097,7 @@ footer {
       </div>
 
       <div class="scroll-mark" aria-hidden="true">
-        <span data-i18n="hero.scroll">SCROLL</span>
+        <span data-i18n="hero.scroll">DERULEAZĂ</span>
         <div></div>
       </div>
     </section>
@@ -4073,36 +4106,36 @@ footer {
     <section class="manifesto-strip" aria-label="JKT Motion identity">
       <div class="manifesto-inner">
         <span class="manifesto-small">JKT MOTION / 001</span>
-        <strong data-i18n="manifesto.main">CLEAN CUTS. DIRTY ENERGY.</strong>
+        <strong data-i18n="manifesto.main">TĂIETURI CURATE · ENERGIE BRUTĂ</strong>
         <span class="manifesto-mark" aria-hidden="true">///</span>
       </div>
     </section>
 
     <section class="ticker" aria-label="Services ticker">
       <div class="ticker-track">
-        <span>AUTOMOTIVE</span><i>✦</i>
-        <span>EVENTS</span><i>✦</i>
-        <span>SOCIAL</span><i>✦</i>
-        <span>COLOR GRADING</span><i>✦</i>
-        <span>SOUND DESIGN</span><i>✦</i>
-        <span>4K EDITING</span><i>✦</i>
-        <span>AUTOMOTIVE</span><i>✦</i>
-        <span>EVENTS</span><i>✦</i>
-        <span>SOCIAL</span><i>✦</i>
-        <span>COLOR GRADING</span><i>✦</i>
-        <span>SOUND DESIGN</span><i>✦</i>
-        <span>4K EDITING</span><i>✦</i>
+        <span data-i18n="ticker.auto">AUTO</span><i>✦</i>
+        <span data-i18n="ticker.events">EVENIMENTE</span><i>✦</i>
+        <span data-i18n="ticker.social">SOCIAL</span><i>✦</i>
+        <span data-i18n="ticker.color">COLORIZARE</span><i>✦</i>
+        <span data-i18n="ticker.sound">DESIGN AUDIO</span><i>✦</i>
+        <span data-i18n="ticker.edit4k">EDITARE 4K</span><i>✦</i>
+        <span data-i18n="ticker.auto">AUTO</span><i>✦</i>
+        <span data-i18n="ticker.events">EVENIMENTE</span><i>✦</i>
+        <span data-i18n="ticker.social">SOCIAL</span><i>✦</i>
+        <span data-i18n="ticker.color">COLORIZARE</span><i>✦</i>
+        <span data-i18n="ticker.sound">DESIGN AUDIO</span><i>✦</i>
+        <span data-i18n="ticker.edit4k">EDITARE 4K</span><i>✦</i>
       </div>
     </section>
 
     <section id="work" class="section work-section">
       <div class="section-head reveal">
         <div>
-          <p class="section-kicker">01 — SELECTED WORK</p>
+          <p class="section-kicker" data-i18n="section.workKicker">01 — PORTOFOLIU</p>
           <h2 data-i18n="work.title">Portofoliu</h2>
         </div>
         <p class="section-note" data-i18n="work.note">
-          Selecția video este în curs de actualizare. Proiectele finale vor apărea aici.
+          O selecție de proiecte video, grupate după eveniment și tipul de producție.
         </p>
       </div>
 
@@ -4116,23 +4149,23 @@ footer {
       </div>
 
       <div class="about-copy reveal">
-        <p class="section-kicker">02 — ABOUT</p>
-        <h2 data-i18n="about.title">Editare construită pentru ritm, imagine și energie.</h2>
+        <p class="section-kicker" data-i18n="section.aboutKicker">02 — DESPRE</p>
+        <h2 data-i18n="about.title">Editare construită pentru ritm, imagine și energie</h2>
 
         <div class="about-callout reveal">
-          <span>FOCUS</span>
-          <strong>AUTOMOTIVE / EVENTS / SOCIAL</strong>
+          <span data-i18n="about.focusLabel">DIRECȚII</span>
+          <strong data-i18n="about.focusValue">AUTO / EVENIMENTE / SOCIAL</strong>
         </div>
 
         <div class="about-text">
           <p data-i18n="about.p1">
-            Sunt editor video cu peste un an de experiență, axat în principal pe montaje auto, videoclipuri de eveniment și conținut pentru social media.
+            Editez videoclipuri clare, dinamice și bine finisate, cu accent pe ritm, imagine și sunet.
           </p>
           <p data-i18n="about.p2">
-            Am experiență și cu materiale de prezentare și promovare pentru evenimente, vloguri și proiecte în formate diverse, de la clipuri verticale scurte până la materiale long-form.
+            Mă ocup de întregul proces de post-producție în DaVinci Resolve Studio, pentru un rezultat profesionist fără costuri sau complicații inutile.
           </p>
           <p data-i18n="about.p3">
-            Lucrez în prezent în DaVinci Resolve Studio, după trecerea de la Adobe Premiere Pro.
+            Pun preț pe comunicare, respectarea termenelor și pe un flux de lucru în care să te poți baza pe mine de la primul montaj până la livrarea finală.
           </p>
         </div>
       </div>
@@ -4141,7 +4174,7 @@ footer {
     <section id="services" class="section services-section">
       <div class="section-head reveal">
         <div>
-          <p class="section-kicker">03 — WHAT I DO</p>
+          <p class="section-kicker" data-i18n="section.servicesKicker">03 — SERVICII</p>
           <h2 data-i18n="services.title">Servicii</h2>
         </div>
       </div>
@@ -4149,69 +4182,69 @@ footer {
       <div class="services-grid">
         <article class="service-card reveal">
           <span class="service-index">01</span>
-          <h3>EDIT</h3>
-          <p data-i18n="services.edit">Editare video până la 4K, short-form și long-form, vertical și orizontal.</p>
+          <h3 data-i18n="services.editTitle">EDITARE</h3>
+          <p data-i18n="services.edit">Editez de la clipuri scurte pentru rețele sociale până la materiale mai lungi, în format vertical sau orizontal, până la 4K.</p>
         </article>
 
         <article class="service-card reveal">
           <span class="service-index">02</span>
-          <h3>COLOR</h3>
-          <p data-i18n="services.color">Color correction și color grading, inclusiv material filmat în LOG.</p>
+          <h3 data-i18n="services.colorTitle">CULOARE</h3>
+          <p data-i18n="services.color">Corectez și finisez culorile pentru un aspect mai curat și mai coerent, inclusiv pentru material filmat în LOG.</p>
         </article>
 
         <article class="service-card reveal">
           <span class="service-index">03</span>
-          <h3>SOUND</h3>
-          <p data-i18n="services.sound">Sound design, efecte audio și finisarea mixului pentru mai mult impact.</p>
+          <h3 data-i18n="services.soundTitle">SUNET</h3>
+          <p data-i18n="services.sound">Construiesc partea audio astfel încât ritmul, tranzițiile și momentele importante să aibă mai mult impact.</p>
         </article>
 
         <article class="service-card reveal">
           <span class="service-index">04</span>
-          <h3>TEXT</h3>
+          <h3 data-i18n="services.textTitle">TEXT</h3>
           <p data-i18n="services.text">Subtitrări simple sau animate, cu efecte adaptate stilului proiectului.</p>
         </article>
 
         <article class="service-card reveal">
           <span class="service-index">05</span>
-          <h3>CONTENT</h3>
-          <p data-i18n="services.content">Automotive, evenimente, promovare, vloguri și social media.</p>
+          <h3 data-i18n="services.contentTitle">CONȚINUT</h3>
+          <p data-i18n="services.content">Lucrez în special cu materiale auto, evenimente, clipuri promoționale, vloguri și conținut pentru rețele sociale.</p>
         </article>
 
         <article class="service-card reveal">
           <span class="service-index">06</span>
-          <h3>REVISION</h3>
+          <h3 data-i18n="services.revisionTitle">REVIZII</h3>
           <p data-i18n="services.revision">Revizii și comunicare pe tot parcursul proiectului.</p>
         </article>
       </div>
     </section>
 
-    <section class="process-section">
+    <section id="process" class="process-section">
       <div class="process-line" aria-hidden="true"></div>
       <div class="process-inner">
         <div class="process-heading reveal">
-          <p class="section-kicker">04 — PROCESS</p>
-          <h2 data-i18n="process.title">De la material brut la un video care lovește.</h2>
+          <p class="section-kicker" data-i18n="section.processKicker">04 — PROCES</p>
+          <h2 data-i18n="process.title">De la material brut la un video care lovește</h2>
         </div>
 
         <div class="process-steps">
           <div class="process-step reveal">
             <span>01</span>
-            <h3 data-i18n="process.step1Title">Brief</h3>
+            <h3 data-i18n="process.step1Title">DIRECȚIE</h3>
             <p data-i18n="process.step1Text">Stabilim direcția, formatul, ritmul și referințele.</p>
           </div>
           <div class="process-step reveal">
             <span>02</span>
-            <h3 data-i18n="process.step2Title">Edit</h3>
-            <p data-i18n="process.step2Text">Construiesc montajul, sound design-ul și flow-ul vizual.</p>
+            <h3 data-i18n="process.step2Title">MONTAJ</h3>
+            <p data-i18n="process.step2Text">Construiesc montajul, designul audio și ritmul vizual.</p>
           </div>
           <div class="process-step reveal">
             <span>03</span>
-            <h3 data-i18n="process.step3Title">Polish</h3>
-            <p data-i18n="process.step3Text">Color, subtitrări, detalii și finisajul final.</p>
+            <h3 data-i18n="process.step3Title">FINISAJ</h3>
+            <p data-i18n="process.step3Text">Culoare, subtitrări, detalii și finisaj final.</p>
           </div>
           <div class="process-step reveal">
             <span>04</span>
-            <h3 data-i18n="process.step4Title">Deliver</h3>
+            <h3 data-i18n="process.step4Title">LIVRARE</h3>
             <p data-i18n="process.step4Text">Exportul final în formatele necesare și revizii.</p>
           </div>
         </div>
@@ -4226,10 +4259,10 @@ footer {
       </div>
 
       <div class="contact-inner reveal">
-        <p class="section-kicker">05 — CONTACT</p>
+        <p class="section-kicker" data-i18n="section.contactKicker">05 — CONTACT</p>
         <h2>
-          <span data-i18n="contact.line1">LET’S MAKE</span>
-          <span class="accent-outline" data-i18n="contact.line2">SOMETHING MOVE.</span>
+          <span data-i18n="contact.line1">HAI SĂ PUNEM</span>
+          <span class="accent-outline" data-i18n="contact.line2">CEVA ÎN MIȘCARE</span>
         </h2>
 
         <div class="contact-links">
@@ -4239,7 +4272,7 @@ footer {
             <span aria-hidden="true">↗</span>
           </a>
           <a href="mailto:businessonlypaul@yahoo.com">
-            <span>Email</span>
+            <span data-i18n="contact.emailLabel">E-mail</span>
             <strong>businessonlypaul@yahoo.com</strong>
             <span aria-hidden="true">↗</span>
           </a>
@@ -4250,7 +4283,7 @@ footer {
 
   <footer>
     <div class="footer-brand">JKT MOTION</div>
-    <p data-i18n="footer.copy">Video editing · Color · Sound</p>
+    <p data-i18n="footer.copy">Editare video · Culoare · Sunet</p>
     <p>© <span id="year"></span> JKT Motion</p>
   </footer>
 
@@ -4269,54 +4302,79 @@ footer {
 <script>
 const translations = {
   ro: {
+    "meta.title": "JKT Motion — Editor video",
+    "meta.description": "JKT Motion — editare video, culoare și design audio pentru proiecte auto, evenimente și conținut pentru rețele sociale.",
+
     "nav.work": "Portofoliu",
     "nav.about": "Despre",
     "nav.services": "Servicii",
+    "nav.process": "Proces",
     "nav.contact": "Contact",
 
-    "hero.eyebrow": "EDITARE 4K · COLOR · SOUND",
-    "hero.tagline": "Haos controlat. Montaj cu impact.",
-    "hero.taglineLine1": "Haos controlat.",
-    "hero.taglineLine2": "Montaj cu impact.",
+    "hero.eyebrow": "EDITARE 4K · CULOARE · SUNET",
+    "hero.tagline": "Haos controlat · Montaj cu impact",
+    "hero.taglineLine1": "Haos controlat",
+    "hero.taglineLine2": "Montaj cu impact",
     "hero.ctaWork": "Vezi portofoliul",
     "hero.ctaContact": "Hai să lucrăm împreună",
-    "hero.scroll": "SCROLL",
-    "hero.available": "AVAILABLE FOR PROJECTS",
-    "manifesto.main": "CLEAN CUTS. DIRTY ENERGY.",
+    "hero.scroll": "DERULEAZĂ",
     "hero.available": "DISPONIBIL PENTRU PROIECTE",
     "hero.statusLabel": "STATUS",
     "hero.editingIn": "EDITARE ÎN",
-    "manifesto.main": "TĂIETURI CURATE. ENERGIE BRUTĂ.",
+
+    "manifesto.main": "TĂIETURI CURATE · ENERGIE BRUTĂ",
+
+    "ticker.auto": "AUTO",
+    "ticker.events": "EVENIMENTE",
+    "ticker.social": "SOCIAL",
+    "ticker.color": "COLORIZARE",
+    "ticker.sound": "DESIGN AUDIO",
+    "ticker.edit4k": "EDITARE 4K",
+
+    "section.workKicker": "01 — PORTOFOLIU",
+    "section.aboutKicker": "02 — DESPRE",
+    "section.servicesKicker": "03 — SERVICII",
+    "section.processKicker": "04 — PROCES",
+    "section.contactKicker": "05 — CONTACT",
 
     "work.title": "Portofoliu",
     "work.note": "O selecție de proiecte video, grupate după eveniment și tipul de producție.",
 
-    "about.title": "Editare construită pentru ritm, imagine și energie.",
-    "about.p1": "Sunt editor video cu peste un an de experiență, axat în principal pe montaje auto, videoclipuri de eveniment și conținut pentru social media.",
-    "about.p2": "Am experiență și cu materiale de prezentare și promovare pentru evenimente, vloguri și proiecte în formate diverse, de la clipuri verticale scurte până la materiale long-form.",
-    "about.p3": "Lucrez în prezent în DaVinci Resolve Studio, după trecerea de la Adobe Premiere Pro.",
+    "about.title": "Editare construită pentru ritm, imagine și energie",
+    "about.focusLabel": "DIRECȚII",
+    "about.focusValue": "AUTO / EVENIMENTE / SOCIAL",
+    "about.p1": "Editez videoclipuri clare, dinamice și bine finisate, cu accent pe ritm, imagine și sunet.",
+    "about.p2": "Mă ocup de întregul proces de post-producție în DaVinci Resolve Studio, pentru un rezultat profesionist fără costuri sau complicații inutile.",
+    "about.p3": "Pun preț pe comunicare, respectarea termenelor și pe un flux de lucru în care să te poți baza pe mine de la primul montaj până la livrarea finală.",
 
     "services.title": "Servicii",
-    "services.edit": "Editez de la clipuri scurte pentru social media până la materiale mai lungi, în format vertical sau orizontal, până la 4K.",
-    "services.color": "Corectez și finisez culorile pentru un look mai curat și mai coerent, inclusiv pentru material filmat în LOG.",
-    "services.sound": "Construiesc partea audio astfel încât ritmul, tranzițiile și momentele importante să se simtă mai puternic.",
+    "services.editTitle": "EDITARE",
+    "services.colorTitle": "CULOARE",
+    "services.soundTitle": "SUNET",
+    "services.textTitle": "TEXT",
+    "services.contentTitle": "CONȚINUT",
+    "services.revisionTitle": "REVIZII",
+    "services.edit": "Editez de la clipuri scurte pentru rețele sociale până la materiale mai lungi, în format vertical sau orizontal, până la 4K.",
+    "services.color": "Corectez și finisez culorile pentru un aspect mai curat și mai coerent, inclusiv pentru material filmat în LOG.",
+    "services.sound": "Construiesc partea audio astfel încât ritmul, tranzițiile și momentele importante să aibă mai mult impact.",
     "services.text": "Pot adăuga subtitrări simple sau animate, adaptate ritmului și stilului fiecărui videoclip.",
-    "services.content": "Lucrez în special cu automotive, evenimente, materiale promo, vloguri și conținut pentru social media.",
+    "services.content": "Lucrez în special cu materiale auto, evenimente, clipuri promoționale, vloguri și conținut pentru rețele sociale.",
     "services.revision": "Ținem legătura pe parcursul proiectului și ajustăm montajul până când rezultatul este în direcția potrivită.",
 
-    "process.title": "De la material brut la un video care lovește.",
-    "process.step1Title": "Brief",
+    "process.title": "De la material brut la un video care lovește",
+    "process.step1Title": "DIRECȚIE",
     "process.step1Text": "Stabilim direcția, formatul, ritmul și referințele.",
-    "process.step2Title": "Edit",
-    "process.step2Text": "Construiesc montajul, sound design-ul și flow-ul vizual.",
-    "process.step3Title": "Polish",
-    "process.step3Text": "Color, subtitrări, detalii și finisajul final.",
-    "process.step4Title": "Deliver",
+    "process.step2Title": "MONTAJ",
+    "process.step2Text": "Construiesc montajul, designul audio și ritmul vizual.",
+    "process.step3Title": "FINISAJ",
+    "process.step3Text": "Culoare, subtitrări, detalii și finisaj final.",
+    "process.step4Title": "LIVRARE",
     "process.step4Text": "Exportul final în formatele necesare și revizii.",
 
-    "contact.line1": "LET’S MAKE",
-    "contact.line2": "SOMETHING MOVE.",
-    "footer.copy": "Video editing · Color · Sound",
+    "contact.line1": "HAI SĂ PUNEM",
+    "contact.line2": "CEVA ÎN MIȘCARE",
+    "contact.emailLabel": "E-mail",
+    "footer.copy": "Editare video · Culoare · Sunet",
 
     "modal.placeholderTitle": "Video în curând",
     "modal.placeholderText": "Acest proiect este pregătit pentru un link YouTube.",
@@ -4327,33 +4385,60 @@ const translations = {
     "project.video": "videoclip",
     "project.open": "Vezi proiectul"
   },
+
   en: {
+    "meta.title": "JKT Motion — Video Editor",
+    "meta.description": "JKT Motion — video editing, color and sound design for automotive projects, events and social content.",
+
     "nav.work": "Work",
     "nav.about": "About",
     "nav.services": "Services",
+    "nav.process": "Process",
     "nav.contact": "Contact",
 
     "hero.eyebrow": "4K EDITS · COLOR · SOUND",
-    "hero.tagline": "Controlled chaos. Editing with impact.",
-    "hero.taglineLine1": "Controlled chaos.",
-    "hero.taglineLine2": "Editing with impact.",
+    "hero.tagline": "Controlled chaos · Editing with impact",
+    "hero.taglineLine1": "Controlled chaos",
+    "hero.taglineLine2": "Editing with impact",
     "hero.ctaWork": "View work",
     "hero.ctaContact": "Let's work together",
     "hero.scroll": "SCROLL",
     "hero.available": "AVAILABLE FOR PROJECTS",
     "hero.statusLabel": "STATUS",
     "hero.editingIn": "EDITING IN",
-    "manifesto.main": "CLEAN CUTS. DIRTY ENERGY.",
+
+    "manifesto.main": "CLEAN CUTS · DIRTY ENERGY",
+
+    "ticker.auto": "AUTOMOTIVE",
+    "ticker.events": "EVENTS",
+    "ticker.social": "SOCIAL",
+    "ticker.color": "COLOR GRADING",
+    "ticker.sound": "SOUND DESIGN",
+    "ticker.edit4k": "4K EDITING",
+
+    "section.workKicker": "01 — SELECTED WORK",
+    "section.aboutKicker": "02 — ABOUT",
+    "section.servicesKicker": "03 — WHAT I DO",
+    "section.processKicker": "04 — PROCESS",
+    "section.contactKicker": "05 — CONTACT",
 
     "work.title": "Selected Work",
     "work.note": "A selection of video projects, grouped by event and production type.",
 
-    "about.title": "Editing built around rhythm, image and energy.",
-    "about.p1": "I'm a video editor with over a year of experience, focused mainly on automotive edits, event videos and social media content.",
-    "about.p2": "I also have experience with event presentation and promotional videos, vlogs, and projects across different formats — from short vertical content to long-form edits.",
-    "about.p3": "I currently work in DaVinci Resolve Studio, after moving from Adobe Premiere Pro.",
+    "about.title": "Editing built around rhythm, image and energy",
+    "about.focusLabel": "FOCUS",
+    "about.focusValue": "AUTOMOTIVE / EVENTS / SOCIAL",
+    "about.p1": "I edit clean, dynamic and polished videos with a strong focus on pacing, visuals and sound.",
+    "about.p2": "I handle the full post-production process in DaVinci Resolve Studio, helping you get a professional result without unnecessary complexity or cost.",
+    "about.p3": "I value clear communication, reliable delivery and a workflow you can count on from the first cut to the final export.",
 
     "services.title": "Services",
+    "services.editTitle": "EDIT",
+    "services.colorTitle": "COLOR",
+    "services.soundTitle": "SOUND",
+    "services.textTitle": "TEXT",
+    "services.contentTitle": "CONTENT",
+    "services.revisionTitle": "REVISION",
     "services.edit": "I edit everything from short social clips to longer videos, in both vertical and horizontal formats, up to 4K.",
     "services.color": "I correct and refine color for a cleaner, more consistent look, including footage shot in LOG.",
     "services.sound": "I shape the audio so the pacing, transitions and key moments feel stronger and more intentional.",
@@ -4361,18 +4446,19 @@ const translations = {
     "services.content": "I mainly work on automotive, events, promo content, vlogs and social media videos.",
     "services.revision": "We stay in touch throughout the project and refine the edit until it feels right.",
 
-    "process.title": "From raw footage to a video that hits.",
-    "process.step1Title": "Brief",
+    "process.title": "From raw footage to a video that hits",
+    "process.step1Title": "BRIEF",
     "process.step1Text": "We define the direction, format, rhythm and references.",
-    "process.step2Title": "Edit",
+    "process.step2Title": "EDIT",
     "process.step2Text": "I build the cut, sound design and visual flow.",
-    "process.step3Title": "Polish",
+    "process.step3Title": "POLISH",
     "process.step3Text": "Color, subtitles, details and final polish.",
-    "process.step4Title": "Deliver",
+    "process.step4Title": "DELIVER",
     "process.step4Text": "Final export in the required formats, plus revisions.",
 
     "contact.line1": "LET’S MAKE",
-    "contact.line2": "SOMETHING MOVE.",
+    "contact.line2": "SOMETHING MOVE",
+    "contact.emailLabel": "Email",
     "footer.copy": "Video editing · Color · Sound",
 
     "modal.placeholderTitle": "Video coming soon",
@@ -4401,7 +4487,7 @@ const projectGroups = [
   {
     title: { ro: "Comicon", en: "Comicon" },
     category: { ro: "EVENIMENT", en: "EVENT" },
-    subtitle: { ro: "Event coverage", en: "Event coverage" },
+    subtitle: { ro: "Montaj de eveniment", en: "Event coverage" },
     format: "16:9",
     videos: [
       "https://youtu.be/lTIo48KJJEw",
@@ -4411,7 +4497,7 @@ const projectGroups = [
   },
   {
     title: { ro: "Prezentare Pârtie", en: "Ski Slope Presentation" },
-    category: { ro: "PROMO", en: "PROMO" },
+    category: { ro: "PROMOVARE", en: "PROMO" },
     subtitle: { ro: "Prezentare / promovare", en: "Presentation / promotion" },
     format: "16:9",
     videos: [
@@ -4421,8 +4507,8 @@ const projectGroups = [
   },
   {
     title: { ro: "Saisho", en: "Saisho" },
-    category: { ro: "AUTOMOTIVE", en: "AUTOMOTIVE" },
-    subtitle: { ro: "Car event", en: "Car event" },
+    category: { ro: "AUTO", en: "AUTOMOTIVE" },
+    subtitle: { ro: "Eveniment auto", en: "Car event" },
     format: "16:9",
     videos: [
       "https://youtu.be/wZGqgyPaMD0?list=PLX28ojsGrQhA"
@@ -4430,8 +4516,8 @@ const projectGroups = [
   },
   {
     title: { ro: "Off Road", en: "Off Road" },
-    category: { ro: "AUTOMOTIVE", en: "AUTOMOTIVE" },
-    subtitle: { ro: "Off-road event", en: "Off-road event" },
+    category: { ro: "AUTO", en: "AUTOMOTIVE" },
+    subtitle: { ro: "Eveniment off-road", en: "Off-road event" },
     format: "16:9",
     videos: [
       "https://youtu.be/-Jo_FbT-re4?list=PLX28ojsGrQhA",
@@ -4576,6 +4662,16 @@ function setLanguage(lang) {
   currentLang = translations[lang] ? lang : "ro";
   document.documentElement.lang = currentLang;
   document.documentElement.dataset.lang = currentLang;
+
+  document.title = translations[currentLang]["meta.title"];
+
+  const metaDescription = document.querySelector('meta[name="description"]');
+  const ogTitle = document.querySelector('meta[property="og:title"]');
+  const ogDescription = document.querySelector('meta[property="og:description"]');
+
+  if (metaDescription) metaDescription.setAttribute("content", translations[currentLang]["meta.description"]);
+  if (ogTitle) ogTitle.setAttribute("content", translations[currentLang]["meta.title"]);
+  if (ogDescription) ogDescription.setAttribute("content", translations[currentLang]["meta.description"]);
 
   document.querySelectorAll("[data-i18n]").forEach(el => {
     const key = el.dataset.i18n;
