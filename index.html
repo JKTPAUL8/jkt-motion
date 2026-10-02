@@ -4710,8 +4710,8 @@ const projectGroups = [
     subtitle: { ro: "Prezentare / promovare", en: "Presentation / promotion" },
     format: "16:9",
     videos: [
-      "https://youtu.be/vgzc6VIDVKE?list=PLX28ojsGrQhA",
-      "https://youtu.be/MjKFV1EMBaw?list=PLX28ojsGrQhA"
+      "https://youtu.be/MjKFV1EMBaw?list=PLX28ojsGrQhA",
+      "https://youtu.be/vgzc6VIDVKE?list=PLX28ojsGrQhA"
     ]
   },
   {
@@ -4720,8 +4720,8 @@ const projectGroups = [
     subtitle: { ro: "Evenimente auto", en: "Car events" },
     format: "16:9",
     videos: [
-      "https://youtu.be/wZGqgyPaMD0?list=PLX28ojsGrQhA",
-      "https://youtu.be/t-Bi3ey3yOA"
+      "https://youtu.be/t-Bi3ey3yOA",
+      "https://youtu.be/wZGqgyPaMD0?list=PLX28ojsGrQhA"
     ]
   },
   {
@@ -4730,8 +4730,8 @@ const projectGroups = [
     subtitle: { ro: "Eveniment off-road", en: "Off-road event" },
     format: "16:9",
     videos: [
-      "https://youtu.be/-Jo_FbT-re4?list=PLX28ojsGrQhA",
-      "https://youtu.be/IQUI6fqsniI?list=PLX28ojsGrQhA"
+      "https://youtu.be/IQUI6fqsniI?list=PLX28ojsGrQhA",
+      "https://youtu.be/-Jo_FbT-re4?list=PLX28ojsGrQhA"
     ]
   }
 ];
@@ -4767,6 +4767,18 @@ function extractYouTubeId(url) {
 
 const projectVideoState = projectGroups.map(() => 0);
 
+/*
+  YouTube thumbnail refresh:
+  using a per-page cache-buster avoids the browser holding onto an older thumbnail
+  after you replace it in YouTube Studio.
+*/
+const youtubeThumbnailCacheKey = Date.now();
+
+function getYouTubeThumbnail(videoId) {
+  if (!videoId) return "";
+  return `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg?jkt=${youtubeThumbnailCacheKey}`;
+}
+
 function getProjectVideoIndex(groupIndex) {
   const group = projectGroups[groupIndex];
   const saved = projectVideoState[groupIndex] ?? 0;
@@ -4783,7 +4795,7 @@ function switchProjectVideo(groupIndex, direction, card) {
 
   const id = extractYouTubeId(group.videos[next]);
   if (id) {
-    card.style.setProperty("--thumb", `url('https://i.ytimg.com/vi/${id}/maxresdefault.jpg')`);
+    preloadProjectThumbnail(id, card);
   }
 
   const label = card.querySelector(".project-current-video");
@@ -4800,6 +4812,20 @@ function switchProjectVideo(groupIndex, direction, card) {
   }, 360);
 }
 
+function preloadProjectThumbnail(videoId, card) {
+  if (!videoId || !card) return;
+
+  const img = new Image();
+  img.onload = () => {
+    card.style.setProperty("--thumb", `url('${getYouTubeThumbnail(videoId)}')`);
+  };
+  img.onerror = () => {
+    const fallback = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg?jkt=${youtubeThumbnailCacheKey}`;
+    card.style.setProperty("--thumb", `url('${fallback}')`);
+  };
+  img.src = getYouTubeThumbnail(videoId);
+}
+
 function renderProjects() {
   if (!projectGrid) return;
 
@@ -4808,7 +4834,7 @@ function renderProjects() {
     const selectedIndex = getProjectVideoIndex(groupIndex);
     const selectedId = extractYouTubeId(group.videos[selectedIndex]);
     const thumbStyle = selectedId
-      ? `style="--thumb:url('https://i.ytimg.com/vi/${selectedId}/maxresdefault.jpg')"`
+      ? `style="--thumb:url('${getYouTubeThumbnail(selectedId)}')"`
       : "";
 
     const countLabel = group.videos.length === 1
@@ -4874,6 +4900,13 @@ function renderProjects() {
       </article>
     `;
   }).join("");
+
+  projectGrid.querySelectorAll(".project-group").forEach(card => {
+    const groupIndex = Number(card.dataset.group);
+    const selectedIndex = getProjectVideoIndex(groupIndex);
+    const selectedId = extractYouTubeId(projectGroups[groupIndex].videos[selectedIndex]);
+    preloadProjectThumbnail(selectedId, card);
+  });
 
   projectGrid.querySelectorAll(".project-carousel-arrow").forEach(button => {
     button.addEventListener("click", (event) => {
