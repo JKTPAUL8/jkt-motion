@@ -3995,6 +3995,209 @@ footer {
   }
 }
 
+
+/* ===== JKT MOTION — V16 PORTFOLIO VIDEO CAROUSEL ===== */
+
+/* The selected YouTube thumbnail becomes the actual card image layer. */
+.project-group {
+  background-image: none !important;
+}
+
+.project-group .project-thumb {
+  z-index: 0;
+  overflow: hidden;
+}
+
+.project-group .project-thumb::before {
+  content: "";
+  position: absolute;
+  inset: -2%;
+  z-index: 0;
+  background-image:
+    linear-gradient(to top, rgba(7,7,7,.98) 0%, rgba(7,7,7,.64) 32%, rgba(7,7,7,.16) 70%, rgba(7,7,7,.28) 100%),
+    var(--thumb);
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.035);
+  transition: filter .25s ease;
+}
+
+.project-group:hover .project-thumb::before {
+  filter: brightness(1.04);
+}
+
+.project-group .project-no {
+  position: relative;
+  z-index: 1;
+}
+
+.project-group::after {
+  z-index: 1;
+  pointer-events: none;
+}
+
+.project-info-group,
+.project-count {
+  z-index: 3;
+}
+
+/* Short slide cue when changing selected video. */
+.project-group.slide-next .project-thumb::before {
+  animation: projectSlideNext .34s cubic-bezier(.2,.72,.25,1);
+}
+
+.project-group.slide-prev .project-thumb::before {
+  animation: projectSlidePrev .34s cubic-bezier(.2,.72,.25,1);
+}
+
+@keyframes projectSlideNext {
+  0%   { opacity: .30; transform: translateX(34px) scale(1.055); }
+  100% { opacity: 1; transform: translateX(0) scale(1.035); }
+}
+
+@keyframes projectSlidePrev {
+  0%   { opacity: .30; transform: translateX(-34px) scale(1.055); }
+  100% { opacity: 1; transform: translateX(0) scale(1.035); }
+}
+
+/* Replace the vertical VIDEO 01 / 02 list with one compact selector. */
+.project-info-group {
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 22px;
+}
+
+.project-video-list {
+  display: none !important;
+}
+
+.project-carousel-controls {
+  display: grid;
+  grid-template-columns: 46px minmax(132px, 170px) 46px;
+  align-items: stretch;
+  gap: 7px;
+  min-width: 238px;
+}
+
+.project-carousel-controls:has(.project-watch-selected:only-child) {
+  grid-template-columns: minmax(150px, 190px);
+  min-width: 150px;
+}
+
+.project-carousel-arrow,
+.project-watch-selected {
+  height: 48px;
+  border: 1px solid rgba(240,233,223,.24);
+  background: rgba(8,8,8,.80);
+  color: var(--ink);
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  transition:
+    background .18s ease,
+    color .18s ease,
+    border-color .18s ease,
+    transform .18s ease;
+}
+
+.project-carousel-arrow {
+  display: grid;
+  place-items: center;
+  padding: 0;
+  font-family: var(--display);
+  font-size: 24px;
+  line-height: 1;
+}
+
+.project-watch-selected {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 13px;
+  font-family: var(--display);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .105em;
+  white-space: nowrap;
+}
+
+.project-watch-play {
+  font-size: 9px;
+}
+
+.project-carousel-arrow:hover,
+.project-carousel-arrow:focus-visible,
+.project-watch-selected:hover,
+.project-watch-selected:focus-visible {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #090909;
+  outline: none;
+}
+
+.project-carousel-prev:hover {
+  transform: translateX(-3px);
+}
+
+.project-carousel-next:hover {
+  transform: translateX(3px);
+}
+
+.project-watch-selected:hover {
+  transform: translateY(-2px);
+}
+
+/* Small red indicator underneath the currently selected video. */
+.project-watch-selected::after {
+  content: "";
+  position: absolute;
+  left: 13px;
+  right: 13px;
+  bottom: 6px;
+  height: 1px;
+  background: var(--accent);
+  opacity: .55;
+  transform-origin: left center;
+}
+
+.project-watch-selected {
+  position: relative;
+}
+
+@media (max-width: 1100px) {
+  .project-carousel-controls {
+    grid-template-columns: 42px minmax(122px, 158px) 42px;
+    min-width: 220px;
+  }
+}
+
+@media (max-width: 700px) {
+  .project-info-group {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .project-carousel-controls {
+    width: 100%;
+    min-width: 0;
+    grid-template-columns: 52px minmax(0, 1fr) 52px;
+    gap: 8px;
+  }
+
+  .project-carousel-controls:has(.project-watch-selected:only-child) {
+    grid-template-columns: 1fr;
+    min-width: 0;
+  }
+
+  .project-carousel-arrow,
+  .project-watch-selected {
+    height: 50px;
+  }
+
+  .project-watch-selected {
+    font-size: 12px;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -4383,7 +4586,10 @@ const translations = {
     "project.watch": "Deschide",
     "project.videos": "videoclipuri",
     "project.video": "videoclip",
-    "project.open": "Vezi proiectul"
+    "project.open": "Vezi proiectul",
+    "project.previous": "Videoclipul anterior",
+    "project.next": "Videoclipul următor",
+    "project.watchSelected": "Vezi videoclipul"
   },
 
   en: {
@@ -4468,7 +4674,10 @@ const translations = {
     "project.watch": "Open",
     "project.videos": "videos",
     "project.video": "video",
-    "project.open": "View project"
+    "project.open": "View project",
+    "project.previous": "Previous video",
+    "project.next": "Next video",
+    "project.watchSelected": "Watch video"
   }
 };
 
@@ -4555,36 +4764,84 @@ function extractYouTubeId(url) {
   return null;
 }
 
+const projectVideoState = projectGroups.map(() => 0);
+
+function getProjectVideoIndex(groupIndex) {
+  const group = projectGroups[groupIndex];
+  const saved = projectVideoState[groupIndex] ?? 0;
+  return Math.min(Math.max(saved, 0), group.videos.length - 1);
+}
+
+function switchProjectVideo(groupIndex, direction, card) {
+  const group = projectGroups[groupIndex];
+  if (!group || group.videos.length <= 1) return;
+
+  const current = getProjectVideoIndex(groupIndex);
+  const next = (current + direction + group.videos.length) % group.videos.length;
+  projectVideoState[groupIndex] = next;
+
+  const id = extractYouTubeId(group.videos[next]);
+  if (id) {
+    card.style.setProperty("--thumb", `url('https://i.ytimg.com/vi/${id}/maxresdefault.jpg')`);
+  }
+
+  const label = card.querySelector(".project-current-video");
+  if (label) {
+    label.textContent = `VIDEO ${String(next + 1).padStart(2, "0")} / ${String(group.videos.length).padStart(2, "0")}`;
+  }
+
+  card.classList.remove("slide-prev", "slide-next");
+  void card.offsetWidth;
+  card.classList.add(direction > 0 ? "slide-next" : "slide-prev");
+
+  window.setTimeout(() => {
+    card.classList.remove("slide-prev", "slide-next");
+  }, 360);
+}
+
 function renderProjects() {
   if (!projectGrid) return;
 
   projectGrid.innerHTML = projectGroups.map((group, groupIndex) => {
     const number = String(groupIndex + 1).padStart(2, "0");
-    const firstId = extractYouTubeId(group.videos[0]);
-    const thumbStyle = firstId
-      ? `style="--thumb:url('https://i.ytimg.com/vi/${firstId}/maxresdefault.jpg')"`
+    const selectedIndex = getProjectVideoIndex(groupIndex);
+    const selectedId = extractYouTubeId(group.videos[selectedIndex]);
+    const thumbStyle = selectedId
+      ? `style="--thumb:url('https://i.ytimg.com/vi/${selectedId}/maxresdefault.jpg')"`
       : "";
+
     const countLabel = group.videos.length === 1
       ? translations[currentLang]["project.video"]
       : translations[currentLang]["project.videos"];
 
-    const videoButtons = group.videos.map((url, videoIndex) => {
-      const id = extractYouTubeId(url);
-      const label = String(videoIndex + 1).padStart(2, "0");
-      return `
-        <button class="project-video-chip"
+    const videoLabel = `VIDEO ${String(selectedIndex + 1).padStart(2, "0")} / ${String(group.videos.length).padStart(2, "0")}`;
+
+    const arrows = group.videos.length > 1
+      ? `
+        <button class="project-carousel-arrow project-carousel-prev"
           type="button"
           data-group="${groupIndex}"
-          data-video="${videoIndex}"
-          aria-label="${group.title[currentLang]} — Video ${label}">
-          <span>VIDEO ${label}</span>
-          <span aria-hidden="true">▶</span>
+          data-direction="-1"
+          aria-label="${translations[currentLang]["project.previous"]}">
+          <span aria-hidden="true">←</span>
         </button>
-      `;
-    }).join("");
+      `
+      : "";
+
+    const nextArrow = group.videos.length > 1
+      ? `
+        <button class="project-carousel-arrow project-carousel-next"
+          type="button"
+          data-group="${groupIndex}"
+          data-direction="1"
+          aria-label="${translations[currentLang]["project.next"]}">
+          <span aria-hidden="true">→</span>
+        </button>
+      `
+      : "";
 
     return `
-      <article class="project-card project-group reveal has-video" ${thumbStyle}>
+      <article class="project-card project-group reveal has-video" data-group="${groupIndex}" ${thumbStyle}>
         <div class="project-thumb" aria-hidden="true">
           <div class="project-no">${number}</div>
         </div>
@@ -4601,22 +4858,62 @@ function renderProjects() {
             <p class="project-subtitle">${group.subtitle[currentLang]}</p>
           </div>
 
-          <div class="project-video-list">
-            ${videoButtons}
+          <div class="project-carousel-controls">
+            ${arrows}
+            <button class="project-watch-selected"
+              type="button"
+              data-group="${groupIndex}"
+              aria-label="${translations[currentLang]["project.watchSelected"]}: ${group.title[currentLang]}">
+              <span class="project-current-video">${videoLabel}</span>
+              <span class="project-watch-play" aria-hidden="true">▶</span>
+            </button>
+            ${nextArrow}
           </div>
         </div>
       </article>
     `;
   }).join("");
 
-  projectGrid.querySelectorAll(".project-video-chip").forEach(button => {
+  projectGrid.querySelectorAll(".project-carousel-arrow").forEach(button => {
     button.addEventListener("click", (event) => {
       event.stopPropagation();
-      openProjectVideo(
+      const card = button.closest(".project-group");
+      switchProjectVideo(
         Number(button.dataset.group),
-        Number(button.dataset.video)
+        Number(button.dataset.direction),
+        card
       );
     });
+  });
+
+  projectGrid.querySelectorAll(".project-watch-selected").forEach(button => {
+    button.addEventListener("click", (event) => {
+      event.stopPropagation();
+      const groupIndex = Number(button.dataset.group);
+      openProjectVideo(groupIndex, getProjectVideoIndex(groupIndex));
+    });
+  });
+
+  /* Swipe left/right on touch devices. */
+  projectGrid.querySelectorAll(".project-group").forEach(card => {
+    const groupIndex = Number(card.dataset.group);
+    if (projectGroups[groupIndex].videos.length <= 1) return;
+
+    let startX = null;
+
+    card.addEventListener("touchstart", (event) => {
+      startX = event.touches[0]?.clientX ?? null;
+    }, { passive: true });
+
+    card.addEventListener("touchend", (event) => {
+      if (startX === null) return;
+      const endX = event.changedTouches[0]?.clientX ?? startX;
+      const delta = endX - startX;
+      startX = null;
+
+      if (Math.abs(delta) < 45) return;
+      switchProjectVideo(groupIndex, delta < 0 ? 1 : -1, card);
+    }, { passive: true });
   });
 
   observeReveals();
